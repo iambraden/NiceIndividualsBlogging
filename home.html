@@ -31,20 +31,32 @@
             </div>
         </div>
     </header>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const dropdownButton = document.querySelector(".dropdown-button");
-            const dropdownContent = document.querySelector(".dropdown-content");
 
-            dropdownButton.addEventListener("click", (event) => {
-                event.stopPropagation();
-                dropdownContent.classList.toggle("show");
-            });
+    <div class="posts-container">
+        <div class="post">
+            <div class="post-header">
+                <span class="username">Jane Doe1</span>
+            </div>
+            <h2>Post Title 1</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+        </div>
+        <div class="post">
+            <div class="post-header">
+                <span class="username">Jane Doe2</span>
+            </div>
+            <h2>Post Title 2</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+        </div>
+        <div class="post">
+            <div class="post-header">
+                <span class="username">Jane Doe3</span>
+            </div>
+            <h2>Post Title 3</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+        </div>
+    </div>
 
-            document.addEventListener("click", () => {
-                dropdownContent.classList.remove("show");
-            });
-        });
-    </script>
+    
+    <script src="home.js"></script>
 </body>
 </html>
