@@ -50,6 +50,7 @@ header {
     background-color: #8697C4;
     cursor: pointer;
     font-family: 'Courier New', Courier, monospace;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-content {
