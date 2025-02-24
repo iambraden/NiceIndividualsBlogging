@@ -20,6 +20,7 @@ header {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    z-index: 2;
 }
 
 .center-container {
@@ -50,18 +51,31 @@ header {
     margin-right: 10px;
 }
 
+button, .search-bar {
+    font-family: 'Courier New', Courier, monospace;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button {
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #8697C4;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 .dropdown {
     position: relative;
 }
 
-.dropdown-button, .login-button, .signup-button {
+.dropdown-button {
     padding: 5px 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #8697C4;
     cursor: pointer;
-    font-family: 'Courier New', Courier, monospace;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -89,11 +103,32 @@ header {
     width: 300px;
     padding: 5px 10px 5px 30px;
     font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-family: 'Courier New', Courier, monospace;
     background: white url('res/search.png') no-repeat 5px center;
     background-size: 20px 20px;
+}
+
+.sidebar {
+    position: fixed;
+    top: 100px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: white;
+    text-align: left;
+    text-decoration: none;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.sidebar-button:hover {
+    background-color: #ADBBDA;
 }
 
 .posts-container {
@@ -114,6 +149,7 @@ header {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative;
+    z-index: 1;
 }
 
 .post-header {
@@ -124,14 +160,6 @@ header {
 
 .username {
     font-weight: bold;
-}
-
-.post h2 {
-    margin-top: 0;
-}
-
-.post p {
-    margin: 0;
 }
 
 .post-icons {
