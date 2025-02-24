@@ -1,0 +1,82 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: #EDE8F5;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+header {
+    background-color: #ADBBDA;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    height: 30px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.center-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.right-container {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    right: 20px;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-button, .login-button, .signup-button {
+    padding: 5px 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #8697C4;
+    cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    min-width: 150px;
+}
+
+.dropdown-content label {
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.search-bar {
+    width: 300px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+}

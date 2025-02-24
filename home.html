@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <header>
+        <h1>Individuals </h1>
+        <div class="header-container">
+            <div class="center-container">
+                <div class="dropdown">
+                    <button class="dropdown-button">Filter ▾</button>
+                    <div class="dropdown-content">
+                        <label><input type="checkbox" value="posts" checked> Posts</label>
+                        <label><input type="checkbox" value="profile" checked> Profile</label>
+                        <label><input type="checkbox" value="option3" checked> Option 3</label>
+                    </div>
+                </div>
+                <input type="text" placeholder="Search..." class="search-bar">
+            </div>
+
+            <div class="right-container">
+                <button class="login-button">Sign in</button>
+                <button class="signup-button">Sign up</button>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const dropdownButton = document.querySelector(".dropdown-button");
+            const dropdownContent = document.querySelector(".dropdown-content");
+
+            dropdownButton.addEventListener("click", (event) => {
+                event.stopPropagation();
+                dropdownContent.classList.toggle("show");
+            });
+
+            document.addEventListener("click", () => {
+                dropdownContent.classList.remove("show");
+            });
+        });
+    </script>
+</body>
+</html>
