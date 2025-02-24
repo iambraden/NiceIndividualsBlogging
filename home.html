@@ -15,7 +15,7 @@
                     <button class="dropdown-button">Filter ▾</button>
                     <div class="dropdown-content">
                         <label><input type="checkbox" value="posts" checked> Posts</label>
-                        <label><input type="checkbox" value="profile" checked> Profile</label>
+                        <label><input type="checkbox" value="profile" checked> Profiles</label>
                         <label><input type="checkbox" value="option3" checked> Option 3</label>
                     </div>
                 </div>
@@ -23,12 +23,14 @@
             </div>
 
             <div class="right-container">
-                <button class="login-button" onclick="window.location.href='signin.html'">Sign in</button>
+                <div class="login-container">
+                    <img src="res/user.png" alt="User Icon" class="user-icon">
+                    <button class="login-button" onclick="window.location.href='signin.html'">Sign in</button>
+                </div>
                 <button class="signup-button" onclick="window.location.href='signup.html'">Sign up</button>
             </div>
         </div>
     </header>
-
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const dropdownButton = document.querySelector(".dropdown-button");

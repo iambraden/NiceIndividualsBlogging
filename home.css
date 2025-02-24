@@ -38,6 +38,17 @@ header {
     right: 20px;
 }
 
+.login-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.user-icon {
+    width: 20px;
+    height: 20px;
+}
+
 .dropdown {
     position: relative;
 }
@@ -75,9 +86,11 @@ header {
 
 .search-bar {
     width: 300px;
-    padding: 5px;
+    padding: 5px 10px 5px 30px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-family: 'Courier New', Courier, monospace;
+    background: white url('res/search.png') no-repeat 5px center;
+    background-size: 20px 20px;
 }
