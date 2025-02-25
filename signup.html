@@ -1,7 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <link rel="stylesheet" href="./css/signup.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign Up</title>
     </head>
     <body>
+
+        <header>
+            <div class="header-container">
+                <h1 class="header-title">CampusConnect</h1>
+                <div class="center-container">
+                    <button class="back-button" onclick="window.location.href='home.html'">Home</button>
+
+                </div>
+            </div>
+        </header>
+        
+        <div class="body-container">
+            <h2>Sign Up</h2>
+            <div class="form-container">
+                <form action="home.html" method="post">
+                    <label for="firstname">First Name</label>
+                    <input type="text" id="firstname" name="firstname">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" id="lastname" name="lastname">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password">
+                    <button type="submit" class="submit-button">Sign Up</button>
+                </form>
+                <p>Already have an account? <a href="./signin.html">Sign in</a></p>
+            </div>
+        </div>
     </body>
+
+    <script src="./scripts/signup.js"></script>
 </html>
