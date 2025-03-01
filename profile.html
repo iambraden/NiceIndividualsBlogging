@@ -25,14 +25,21 @@
     
                 <div class="right-container">
                     <div class="login-container">
-                        <img src="res/settings.png" alt="Settigns Icon" class="settings-icon">
-                        <button class="settings-button" onclick="window.location.href='signin.html'">Settings</button>
+                        <div class="dropdown">
+                            <button class="dropdown-button">Settings ▾</button>
+                            <div class="dropdown-content" style="width : 110px;">
+                                <button>Account</a>
+                                <br>
+                                <button>Logout</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </header>
         <section class="profileHead">
             <div class="profileHead-container">
+                <h1 class="profileHeader">*Profile Header*</h1>
                 <img src="res/user.png" alt="User Icon" class="user-icon">
                 <h2 class="userName">John Doe</h2>
                 <p class="username">johndoe42</p>

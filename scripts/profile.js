@@ -1,14 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const dropdownButton = document.querySelector(".dropdown-button");
-    const dropdownContent = document.querySelector(".dropdown-content");
+    const dropdownButtons = document.querySelectorAll('.dropdown-button');
+    const dropdownContents = document.querySelectorAll('.dropdown-content');
 
-    dropdownButton.addEventListener("click", (event) => {
-        event.stopPropagation();
-        dropdownContent.classList.toggle("show");
+    dropdownButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.stopPropagation();
+            const dropdownContent = this.nextElementSibling;
+            dropdownContent.classList.toggle('show');
+        });
     });
 
-    document.addEventListener("click", () => {
-        dropdownContent.classList.remove("show");
+    dropdownContents.forEach(content => {
+        content.addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+    });
+
+    window.addEventListener('click', function(event) {
+        if (!event.target.matches('.dropdown-button')) {
+            const dropdowns = document.querySelectorAll('.dropdown-content');
+            dropdowns.forEach(dropdown => {
+                if (dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        }
     });
 
     const posts = document.querySelectorAll(".post");

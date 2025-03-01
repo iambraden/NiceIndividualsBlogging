@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
         dropdownContent.classList.toggle("show");
     });
 
+    dropdownContent.addEventListener("click", (event) => {
+        event.stopPropagation();
+    });
+
     document.addEventListener("click", () => {
         dropdownContent.classList.remove("show");
     });
