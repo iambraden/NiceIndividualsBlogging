@@ -1,12 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
 body, html {
     margin: 0;
     padding: 0;
-    background-color: #8697C4;
-    font-family: 'Courier New', Courier, monospace;
+    background-color: #E7F4FF;
+    font-family: 'Roboto', sans-serif;
 }
 
 header {
-    background-color: #ADBBDA;
+    background-color: #99CCF8;
     padding: 10px 20px;
     display: flex;
     align-items: center;
@@ -52,8 +55,8 @@ header {
 }
 
 button, .search-bar {
-    font-family: 'Courier New', Courier, monospace;
-    border: 1px solid #ccc;
+    font-family: 'Roboto', sans-serif;
+    border: 1px solid #fdfdfd;
     border-radius: 4px;
     cursor: pointer;
 }
@@ -61,7 +64,7 @@ button, .search-bar {
 button {
     padding: 5px 10px;
     font-size: 16px;
-    background-color: #8697C4;
+    background-color: #ffffff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -74,7 +77,7 @@ button {
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #8697C4;
+    background-color: #fefeff;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -138,14 +141,14 @@ button {
     padding: 20px;
     max-width: 800px;
     margin: 20px auto;
-    background-color: #ADBBDA;
+    background-color: #99CCF8;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .post {
     padding: 20px;
-    background-color: #D9D9D9;
+    background-color: #dff0fc;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative;

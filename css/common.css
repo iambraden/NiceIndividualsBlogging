@@ -1,11 +1,8 @@
-head, body, html{
+/* common.css */
+body, html {
     background-color: #E7F4FF;
     margin: 0;
     padding: 0;
-    font-family: 'Courier New', Courier, monospace;
-}
-
-body {
     font-family: 'Roboto', sans-serif;
 }
 
@@ -27,13 +24,17 @@ body {
     align-items: center;
 }
 
-.back-button {
+.back-button, .signup-button, .login-button {
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
+}
+
+.back-button:hover, .signup-button:hover, .login-button:hover {
+    background-color: #0056b3;
 }
 
 .body-container {
@@ -63,8 +64,8 @@ label {
 input[type="text"],
 input[type="password"],
 input[type="email"] {
-    margin-bottom: 20px; 
-    padding: 15px; 
+    margin-bottom: 20px;
+    padding: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
@@ -76,8 +77,9 @@ input[type="file"] {
     font-size: 16px;
     padding: 10px;
 }
+
 .submit-button {
-    padding: 15px; 
+    padding: 15px;
     background-color: #007bff;
     color: white;
     border: none;
