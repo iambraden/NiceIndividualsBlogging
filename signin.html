@@ -7,13 +7,11 @@
         <title>Sign In</title>
     </head>
     <body>
-
         <header>
             <div class="header-container">
                 <h1 class="header-title">CampusConnect</h1>
                 <div class="center-container">
                     <button class="back-button" onclick="window.location.href='home.html'">Home</button>
-
                 </div>
             </div>
         </header>
@@ -24,14 +22,15 @@
                 <form action="home.html" method="post">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username">
+                    
                     <label for="password">Password</label>
                     <input type="password" id="password" name="password">
-                    <button type="submit" class="submit-button">Sign In</button>
+                    <button type="submit" class="submit-button" name="role" value="user">User Sign In</button>
+                    <button type="submit" class="submit-button" name="role" value="admin">Admin Sign In</button>
                 </form>
                 <p>Don't have an account? <a href="./signup.html">Sign up</a></p>
             </div>
         </div>
     </body>
-
     <script src="./scripts/signin.js"></script>
 </html>

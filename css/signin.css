@@ -8,7 +8,7 @@ head, body{
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 body {
-    font-family: 'Roboto', sans-serif; /* Apply Roboto font family */
+    font-family: 'Roboto', sans-serif; 
 }
 
 .header-container {
@@ -47,8 +47,8 @@ body {
 }
 
 .form-container {
-    width: 400px; /* Increased width */
-    padding: 30px; /* Increased padding */
+    width: 400px; 
+    padding: 30px; 
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #dff0fc;
@@ -66,21 +66,22 @@ label {
 
 input[type="text"],
 input[type="password"],input[type="email"] {
-    margin-bottom: 20px; /* Increased margin-bottom */
-    padding: 15px; /* Increased padding */
+    margin-bottom: 20px;
+    padding: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
 }
 
 .submit-button {
-    padding: 15px; /* Increased padding */
+    padding: 15px;
     background-color: #007bff;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
     font-size: 18px;
+    margin: 10px;
 }
 
 .submit-button:hover {
