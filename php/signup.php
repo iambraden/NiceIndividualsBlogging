@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="./css/signup.css">
+        <link rel="stylesheet" href="../css/signup.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sign Up</title>
@@ -12,7 +12,7 @@
             <div class="header-container">
                 <h1 class="header-title">CampusConnect</h1>
                 <div class="center-container">
-                    <button class="back-button" onclick="window.location.href='home.html'">Home</button>
+                    <button class="back-button" onclick="window.location.href='home.php'">Home</button>
 
                 </div>
             </div>
@@ -21,7 +21,7 @@
         <div class="body-container">
             <h2>Sign Up</h2>
             <div class="form-container">
-                <form action="home.html" method="post">
+                <form action="home.php" method="post">
                     <label for="firstname">First Name</label>
                     <input type="text" id="firstname" name="firstname">
                     <label for="lastname">Last Name</label>
@@ -36,10 +36,10 @@
                     <input type="file" id="profile-picture" name="profile-picture">
                     <button type="submit" class="submit-button">Sign Up</button>
                 </form>
-                <p>Already have an account? <a href="./signin.html">Sign in</a></p>
+                <p>Already have an account? <a href="signin.php">Sign in</a></p>
             </div>
         </div>
     </body>
 
-    <script src="./scripts/signup.js"></script>
+    <script src="../scripts/signup.js"></script>
 </html>

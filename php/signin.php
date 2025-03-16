@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="./css/signin.css">
+        <link rel="stylesheet" href="../css/signin.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sign In</title>
@@ -11,7 +11,7 @@
             <div class="header-container">
                 <h1 class="header-title">CampusConnect</h1>
                 <div class="center-container">
-                    <button class="back-button" onclick="window.location.href='home.html'">Home</button>
+                    <button class="back-button" onclick="window.location.href='home.php'">Home</button>
                 </div>
             </div>
         </header>
@@ -19,7 +19,7 @@
         <div class="body-container">
             <h2>Sign In</h2>
             <div class="form-container">
-                <form action="php/authenticate.php" method="post">
+                <form action="authenticate.php" method="post">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" required>
                     
@@ -29,9 +29,9 @@
                     <button type="submit" class="submit-button" name="role" value="user">User Sign In</button>
                     <button type="submit" class="submit-button" name="role" value="admin">Admin Sign In</button>
                 </form>
-                <p>Don't have an account? <a href="./signup.html">Sign up</a></p>
+                <p>Don't have an account? <a href="signup.php">Sign up</a></p>
             </div>
         </div>
     </body>
-    <script src="./scripts/signin.js"></script>
+    <script src="../scripts/signin.js"></script>
 </html>

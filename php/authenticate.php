@@ -15,10 +15,10 @@ $role = $_POST['role'] ?? '';
 if(isset($validUser[$username]) && $validUser[$username] == $password){
     $_SESSION['username'] = $username;
     $_SESSION['role'] = $role;
-    header('Location: ../profile.html');
+    header('Location: profile.php');
     exit();
 }else{
-    header('Location: ../signin.html');
+    header('Location: signin.php');
     exit();
 }
 ?>

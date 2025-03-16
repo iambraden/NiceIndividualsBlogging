@@ -1,14 +1,22 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('Location: signin.php');
+    exit();
+}
+$username = $_SESSION['username'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
-    <link rel="stylesheet" href="./css/home.css">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="../css/profile.css">
 </head>
 <body>
     <header>
-        <h1>Individuals </h1>
+        <h1>Individuals</h1>
         <div class="header-container">
             <div class="center-container">
                 <div class="dropdown">
@@ -24,43 +32,46 @@
 
             <div class="right-container">
                 <div class="login-container">
-                    <img src="res/user.png" alt="User Icon" class="user-icon">
-                    <button class="login-button" onclick="window.location.href='signin.html'">Sign in</button>
+                    <div class="dropdown">
+                        <button class="dropdown-button">Settings ▾</button>
+                        <div class="dropdown-content" style="width : 110px;">
+                            <button>Account</button>
+                            <br>
+                            <button>Logout</button>
+                        </div>
+                    </div>
                 </div>
-                <button class="signup-button" onclick="window.location.href='signup.html'">Sign up</button>
             </div>
         </div>
     </header>
-
+    <section class="profileHead">
+        <div class="profileHead-container">
+            <h1 class="profileHeader">*Profile Header*</h1>
+            <img src="../res/user.png" alt="User Icon" class="user-icon">
+            <h2 class="userName">John Doe</h2>
+            <p class="username" id="username"><?php echo htmlspecialchars($username); ?></p>
+        </div>
+    </section>
     <div class="sidebar">
-        <button class="sidebar-button" onclick="window.location.href='home.html'"><strong>Home</strong></a>
-        <button class="sidebar-button" onclick="window.location.href='profile.html'">My Profile</button>
+        <button class="sidebar-button" onclick="window.location.href='home.php'">Home</button>
+        <button class="sidebar-button" onclick="window.location.href='profile.php'"><strong>My Profile</strong></button>
     </div>
-
     <div class="posts-container">
         <div class="post">
             <div class="post-header">
-                <span class="username">Jane Doe1</span>
+                <span class="username">johndoe42</span>
             </div>
             <h2>Post Title 1</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
         </div>
         <div class="post">
             <div class="post-header">
-                <span class="username">Jane Doe2</span>
+                <span class="username">johndoe42</span>
             </div>
             <h2>Post Title 2</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
         </div>
-        <div class="post">
-            <div class="post-header">
-                <span class="username">Jane Doe3</span>
-            </div>
-            <h2>Post Title 3</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
-        </div>
     </div>
-
-    <script src="./scripts/home.js"></script>
+    <script src="../scripts/profile.js"></script>
 </body>
 </html>
