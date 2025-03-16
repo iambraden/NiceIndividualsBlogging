@@ -1,12 +1,13 @@
-head, body, html{
+head, body{
     background-color: #E7F4FF;
     margin: 0;
     padding: 0;
-    font-family: 'Courier New', Courier, monospace;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif; 
 }
 
 .header-container {
@@ -44,8 +45,8 @@ body {
 }
 
 .form-container {
-    width: 600px;
-    padding: 30px;
+    width: 400px; 
+    padding: 30px; 
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #dff0fc;
@@ -63,11 +64,18 @@ label {
 input[type="text"],
 input[type="password"],
 input[type="email"] {
-    margin-bottom: 20px; 
-    padding: 15px; 
+    padding: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    outline: none;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
 input[type="file"] {
@@ -76,15 +84,16 @@ input[type="file"] {
     font-size: 16px;
     padding: 10px;
 }
+
 .submit-button {
-    padding: 15px; 
+    padding: 15px;
     background-color: #007bff;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 5px;
     font-size: 18px;
-    margin-top: 20px;
+    margin: 10px;
 }
 
 .submit-button:hover {
@@ -98,5 +107,8 @@ p {
     font-size: 18px;
 }
 
-/* Import Roboto font from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+.required {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
