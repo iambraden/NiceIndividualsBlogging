@@ -12,7 +12,7 @@ $isLoggedIn = isset($_SESSION['username']);
 </head>
 <body>
     <header>
-        <h1>Individuals</h1>
+        <h1>CampusConnect</h1>
         <div class="header-container">
             <div class="center-container">
                 <div class="dropdown">
