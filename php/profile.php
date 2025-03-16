@@ -37,7 +37,7 @@ $username = $_SESSION['username'];
                         <div class="dropdown-content" style="width : 110px;">
                             <button>Account</button>
                             <br>
-                            <button>Logout</button>
+                            <button onclick="window.location.href='logout.php'">Logout</button>
                         </div>
                     </div>
                 </div>
@@ -48,8 +48,7 @@ $username = $_SESSION['username'];
         <div class="profileHead-container">
             <h1 class="profileHeader">*Profile Header*</h1>
             <img src="../res/user.png" alt="User Icon" class="user-icon">
-            <h2 class="userName">John Doe</h2>
-            <p class="username" id="username"><?php echo htmlspecialchars($username); ?></p>
+            <h2 class="userName"><?php echo htmlspecialchars($username); ?></h2>
         </div>
     </section>
     <div class="sidebar">
@@ -59,14 +58,14 @@ $username = $_SESSION['username'];
     <div class="posts-container">
         <div class="post">
             <div class="post-header">
-                <span class="username">johndoe42</span>
+                <span class="username"><?php echo htmlspecialchars($username); ?></span>
             </div>
             <h2>Post Title 1</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
         </div>
         <div class="post">
             <div class="post-header">
-                <span class="username">johndoe42</span>
+                <span class="username"><?php echo htmlspecialchars($username); ?></span>
             </div>
             <h2>Post Title 2</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>

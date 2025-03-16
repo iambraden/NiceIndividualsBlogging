@@ -1,26 +1,42 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const dropdownButton = document.querySelector(".dropdown-button");
-    const dropdownContent = document.querySelector(".dropdown-content");
+    const dropdownButtons = document.querySelectorAll('.dropdown-button');
+    const dropdownContents = document.querySelectorAll('.dropdown-content');
 
-    dropdownButton.addEventListener("click", (event) => {
-        event.stopPropagation();
-        dropdownContent.classList.toggle("show");
+    // Toggle dropdown content visibility on button click
+    dropdownButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.stopPropagation();
+            const dropdownContent = this.nextElementSibling;
+            dropdownContent.classList.toggle('show');
+        });
     });
 
-    dropdownContent.addEventListener("click", (event) => {
-        event.stopPropagation();
+    // Prevent dropdown content from closing when clicked inside
+    dropdownContents.forEach(content => {
+        content.addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
     });
 
-    document.addEventListener("click", () => {
-        dropdownContent.classList.remove("show");
+    // Close dropdowns when clicking outside
+    window.addEventListener('click', function(event) {
+        if (!event.target.matches('.dropdown-button')) {
+            const dropdowns = document.querySelectorAll('.dropdown-content');
+            dropdowns.forEach(dropdown => {
+                if (dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        }
     });
 
+    // Add icons to each post
     const posts = document.querySelectorAll(".post");
     posts.forEach(post => {
         const postHeader = post.querySelector(".post-header");
 
         const userIcon = document.createElement("img");
-        userIcon.src = "res/user.png";
+        userIcon.src = "../res/user.png";
         userIcon.alt = "User Icon";
         userIcon.classList.add("user-icon");
 
@@ -30,22 +46,22 @@ document.addEventListener("DOMContentLoaded", () => {
         postIcons.classList.add("post-icons");
 
         const thumbsUp = document.createElement("img");
-        thumbsUp.src = "res/thumbs-up.png";
+        thumbsUp.src = "../res/thumbs-up.png";
         thumbsUp.alt = "Thumbs Up";
         thumbsUp.classList.add("icon");
 
         const thumbsDown = document.createElement("img");
-        thumbsDown.src = "res/thumbs-down.png";
+        thumbsDown.src = "../res/thumbs-down.png";
         thumbsDown.alt = "Thumbs Down";
         thumbsDown.classList.add("icon");
 
         const comment = document.createElement("img");
-        comment.src = "res/comment-alt.png";
+        comment.src = "../res/comment-alt.png";
         comment.alt = "Comment";
         comment.classList.add("icon");
 
         const share = document.createElement("img");
-        share.src = "res/share.png";
+        share.src = "../res/share.png";
         share.alt = "Share";
         share.classList.add("icon");
 

@@ -1,3 +1,7 @@
+<?php
+session_start();
+$isLoggedIn = isset($_SESSION['username']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +12,7 @@
 </head>
 <body>
     <header>
-        <h1>Individuals </h1>
+        <h1>Individuals</h1>
         <div class="header-container">
             <div class="center-container">
                 <div class="dropdown">
@@ -23,11 +27,24 @@
             </div>
 
             <div class="right-container">
-                <div class="login-container">
-                    <img src="../res/user.png" alt="User Icon" class="user-icon">
-                    <button class="login-button" onclick="window.location.href='signin.php'">Sign in</button>
-                </div>
-                <button class="signup-button" onclick="window.location.href='signup.php'">Sign up</button>
+                <?php if ($isLoggedIn): ?>
+                    <div class="login-container">
+                        <div class="dropdown">
+                            <button class="dropdown-button">Settings ▾</button>
+                            <div class="dropdown-content" style="width: 110px;">
+                                <button>Account</button>
+                                <br>
+                                <button onclick="window.location.href='logout.php'">Logout</button>
+                            </div>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div class="login-container">
+                        <img src="../res/user.png" alt="User Icon" class="user-icon">
+                        <button class="login-button" onclick="window.location.href='signin.php'">Sign in</button>
+                    </div>
+                    <button class="signup-button" onclick="window.location.href='signup.php'">Sign up</button>
+                <?php endif; ?>
             </div>
         </div>
     </header>
