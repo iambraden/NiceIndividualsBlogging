@@ -203,16 +203,19 @@ button {
     text-align: center;
 }
 .user-icon {
-    height: 5em; 
-    width: 5em; 
-    border-radius: 50%; 
-    object-fit: cover; 
+    height: 5em;
+    width: 5em;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 .user-iconPost {
     width: 40px;
-    height: 40px; 
-    border-radius: 50%; 
-    object-fit: cover; 
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
     margin-right: 10px;
+    border: 1px solid #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
