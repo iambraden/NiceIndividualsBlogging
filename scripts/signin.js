@@ -30,13 +30,11 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 
     form.addEventListener('submit', function(event){
-        event.preventDefault();
-
+       
         if(userName.value.trim() === '' || password.value.trim() === ''){
+            event.preventDefault();
             alert('Please fill in all fields');
-        }else{
-            alert('Form submitted successfully');
         }
+        // If all fields are filled, the form will submit to the server
     });
-    
 });

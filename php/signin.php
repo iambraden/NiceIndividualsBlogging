@@ -1,37 +1,48 @@
+<?php
+session_start();
+$error = $_SESSION['error'] ?? '';
+unset($_SESSION['error']);
+?>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link rel="stylesheet" href="../css/signin.css">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sign In</title>
-    </head>
-    <body>
-        <header>
-            <div class="header-container">
-                <h1 class="header-title">CampusConnect</h1>
-                <div class="center-container">
-                    <button class="back-button" onclick="window.location.href='home.php'">Home</button>
-                </div>
-            </div>
-        </header>
-        
-        <div class="body-container">
-            <h2>Sign In</h2>
-            <div class="form-container">
-                <form action="authenticate.php" method="post">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
-                    
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
-                
-                    <button type="submit" class="submit-button" name="role" value="user">User Sign In</button>
-                    <button type="submit" class="submit-button" name="role" value="admin">Admin Sign In</button>
-                </form>
-                <p>Don't have an account? <a href="signup.php">Sign up</a></p>
+<head>
+    <link rel="stylesheet" href="../css/signin.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1 class="header-title">CampusConnect</h1>
+            <div class="center-container">
+                <button class="back-button" onclick="window.location.href='home.php'">Home</button>
             </div>
         </div>
-    </body>
-    <script src="../scripts/signin.js"></script>
+    </header>
+    
+    <div class="body-container">
+        <h2>Sign In</h2>
+        <div class="form-container">
+            <?php if (!empty($error)): ?>
+                <div class="error-messages">
+                    <p><?php echo htmlspecialchars($error); ?></p>
+                </div>
+            <?php endif; ?>
+
+            <form action="authenticate.php" method="post">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            
+                <button type="submit" class="submit-button" name="role" value="user">User Sign In</button>
+                <button type="submit" class="submit-button" name="role" value="admin">Admin Sign In</button>
+            </form>
+            <p>Don't have an account? <a href="signup.php">Sign up</a></p>
+        </div>
+    </div>
+</body>
+<script src="../scripts/signin.js"></script>
 </html>
