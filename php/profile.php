@@ -4,7 +4,27 @@ if (!isset($_SESSION['username'])) {
     header('Location: signin.php');
     exit();
 }
+
+require_once 'db.php'; // Include the database connection
+
 $username = $_SESSION['username'];
+
+// Fetch user data from the database
+$sql = "SELECT profile_picture FROM users WHERE username = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('s', $username);
+$stmt->execute();
+$stmt->bind_result($profile_picture);
+$stmt->fetch();
+$stmt->close();
+$conn->close();
+
+// Set default profile picture if none is uploaded
+if (empty($profile_picture)) {
+    $profile_picture = '../res/user.png';
+}else{
+    $profile_picture = '../upload/' . $profile_picture;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +36,7 @@ $username = $_SESSION['username'];
 </head>
 <body>
     <header>
+    <input type="hidden" id="profile-picture" value="<?php echo htmlspecialchars($profile_picture); ?>">
         <h1>CampusConnect</h1>
         <div class="header-container">
             <div class="center-container">
@@ -47,7 +68,7 @@ $username = $_SESSION['username'];
     <section class="profileHead">
         <div class="profileHead-container">
             <h1 class="profileHeader">*Profile Header*</h1>
-            <img src="../res/user.png" alt="User Icon" class="user-icon">
+            <img src="<?php echo htmlspecialchars($profile_picture); ?>" alt="User Icon" class="user-icon">
             <h2 class="userName"><?php echo htmlspecialchars($username); ?></h2>
         </div>
     </section>

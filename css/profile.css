@@ -202,3 +202,17 @@ button {
     width: 100%;
     text-align: center;
 }
+.user-icon {
+    height: 5em; 
+    width: 5em; 
+    border-radius: 50%; 
+    object-fit: cover; 
+}
+
+.user-iconPost {
+    width: 40px;
+    height: 40px; 
+    border-radius: 50%; 
+    object-fit: cover; 
+    margin-right: 10px;
+}
