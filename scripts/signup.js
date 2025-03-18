@@ -66,12 +66,10 @@ document.addEventListener('DOMContentLoaded', function(){
     }); 
 
     form.addEventListener('submit', function(event){
-        event.preventDefault();
-
         if(firstName.value.trim() === '' || lastName.value.trim() === '' || email.value.trim() === '' || userName.value.trim() === '' || password.value.trim() === ''){
+            event.preventDefault();
             alert('Please fill in all fields');
-        }else{
-            alert('Form submitted successfully');
         }
+        // If all fields are filled, the form will submit to the server
     });
 });
