@@ -5,7 +5,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-require_once 'db.php'; // Include the database connection
+require_once 'db.php';
 
 $username = $_SESSION['username'];
 
@@ -22,9 +22,15 @@ $conn->close();
 // Set default profile picture if none is uploaded
 if (empty($profile_picture)) {
     $profile_picture = '../res/user.png';
-}else{
+} else {
     $profile_picture = '../upload/' . $profile_picture;
 }
+
+// Display success or error messages
+$success = $_SESSION['success'] ?? '';
+$error = $_SESSION['error'] ?? '';
+unset($_SESSION['success']);
+unset($_SESSION['error']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +42,7 @@ if (empty($profile_picture)) {
 </head>
 <body>
     <header>
-    <input type="hidden" id="profile-picture" value="<?php echo htmlspecialchars($profile_picture); ?>">
+        <input type="hidden" id="profile-picture" value="<?php echo htmlspecialchars($profile_picture); ?>">
         <h1>CampusConnect</h1>
         <div class="header-container">
             <div class="center-container">
@@ -70,6 +76,22 @@ if (empty($profile_picture)) {
             <h1 class="profileHeader">*Profile Header*</h1>
             <img src="<?php echo htmlspecialchars($profile_picture); ?>" alt="User Icon" class="user-icon">
             <h2 class="userName"><?php echo htmlspecialchars($username); ?></h2>
+            <form action="update_profile_picture.php" method="post" enctype="multipart/form-data" class="profile-picture-form">
+                <label for="profile-picture-upload" class="upload-label">
+                    <span>Change Profile Picture</span>
+                    <input type="file" id="profile-picture-upload" name="profile-picture" accept="image/jpeg, image/png, image/gif" style="display: none;" onchange="this.form.submit()">
+                </label>
+            </form>
+            <?php if (!empty($success)): ?>
+                <div id="success-message" class="success-message">
+                    <?php echo htmlspecialchars($success); ?>
+                </div>
+            <?php endif; ?>
+            <?php if (!empty($error)): ?>
+                <div id="error-message" class="error-message">
+                    <?php echo htmlspecialchars($error); ?>
+                </div>
+            <?php endif; ?>
         </div>
     </section>
     <div class="sidebar">

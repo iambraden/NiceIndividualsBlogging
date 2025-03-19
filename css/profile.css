@@ -23,18 +23,19 @@ header {
     z-index: 2;
 }
 
-.center-container {
+.center-container, .right-container {
     display: flex;
     gap: 10px;
     align-items: center;
+}
+
+.center-container {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
 
 .right-container {
-    display: flex;
-    gap: 10px;
     position: absolute;
     right: 20px;
 }
@@ -175,47 +176,86 @@ button {
     height: 20px;
     cursor: pointer;
 }
+
 .profileHead-container {
     display: flex;
-    flex-direction: column; 
-    align-items: flex-start; 
-    justify-content: flex-end; 
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
     height: 17em;
     max-width: 55em;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2em;
+    margin: 2em auto 0;
     background-color: #BADCFC;
     padding-left: 2em;
     border-radius: 1em;
     position: relative;
 }
-.user-icon{
-    height: 5em;
-}
-.user-iconPost {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-}
-.profileHeader {
-    width: 100%;
-    text-align: center;
-}
-.user-icon {
-    height: 5em;
-    width: 5em;
+
+.user-icon, .user-iconPost {
     border-radius: 50%;
     object-fit: cover;
     border: 1px solid #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.user-icon {
+    height: 5em;
+    width: 5em;
+}
+
 .user-iconPost {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
     margin-right: 10px;
-    border: 1px solid #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.profileHeader {
+    width: 100%;
+    text-align: center;
+}
+
+.profile-picture-form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.upload-label {
+    background-color: #008CBA;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+}
+
+.upload-label:hover {
+    background-color: #007B9E;
+}
+
+.success-message, .error-message {
+    font-size: 14px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 8px 16px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.success-message {
+    color: green;
+}
+
+.error-message {
+    color: red;
 }

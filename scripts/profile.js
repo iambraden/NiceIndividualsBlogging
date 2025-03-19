@@ -75,4 +75,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
         post.appendChild(postIcons);
     });
+
+    // Automatically hide success and error messages after 5 seconds
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+
+    if (successMessage) {
+        setTimeout(() => {
+            successMessage.style.opacity = '0'; 
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 500);
+        }, 3000);
+    }
+
+    if (errorMessage) {
+        setTimeout(() => {
+            errorMessage.style.opacity = '0'; 
+            setTimeout(() => {
+                errorMessage.style.display = 'none'; 
+            }, 500);
+        }, 3000); 
+    }
 });
