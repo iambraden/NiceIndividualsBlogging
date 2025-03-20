@@ -4,8 +4,8 @@ $username = "root";
 $password = "";
 $dbname = "campusconnect";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Create connection (had to force port 3307 to avoid errors)
+$conn = new mysqli($servername, $username, $password, $dbname, 3307);
 
 // Check connection
 if ($conn->connect_error) {
