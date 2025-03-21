@@ -54,6 +54,31 @@ $isLoggedIn = isset($_SESSION['username']);
         <button class="sidebar-button" onclick="window.location.href='profile.php'">My Profile</button>
     </div>
 
+    <?php if ($isLoggedIn): ?>
+    <button class="post-button" onclick="openForm()">Create Post</button>
+    <div class="post-popup" id="postForm" style="display: none;">
+        <div class="form-container">
+            <h3>Create Post</h3>
+            <form action="create_post.php" method="POST" class="postForm-container">
+                <div class="form-group">
+                    <label for="postTitle"><b>Title</b></label>
+                    <input type="text" placeholder="Title your post" name="postTitle" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="postBody"><b>Content</b></label>
+                    <textarea placeholder="Enter your post content" name="postBody" rows="6" required></textarea>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="submit-post-button">Submit Post</button>
+                    <button type="button" class="cancel-post-button" onclick="closeForm()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <?php endif; ?>
+
     <div class="posts-container">
         <div class="post">
             <div class="post-header">
