@@ -41,8 +41,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile-picture'])) 
 
     // Move the uploaded file to the uploads directory
     $upload_dir = '../upload/';
+
+    // check if directory exists and is writable
+    if (!is_dir($upload_dir)) {
+        // gry to create it if it doesn't exist
+        if (!mkdir($upload_dir, 0777, true)) {
+            $_SESSION['error'] = 'Upload directory does not exist and could not be created.';
+            header('Location: profile.php');
+            exit();
+        }
+    }
+
+    if (!is_writable($upload_dir)) {
+        $_SESSION['error'] = 'Upload directory is not writable. Please check permissions.';
+        header('Location: profile.php');
+        exit();
+    }
+
+    error_log("Attempting to upload file: " . $file_name . " to " . $upload_dir);
+    error_log("Directory exists: " . (is_dir($upload_dir) ? 'Yes' : 'No'));
+    error_log("Directory writable: " . (is_writable($upload_dir) ? 'Yes' : 'No'));
+
     $profile_picture = uniqid() . '_' . basename($file_name);
     if (move_uploaded_file($file_tmp, $upload_dir . $profile_picture)) {
+        error_log("File upload successful: " . $profile_picture);
       
         $sql = "UPDATE users SET profile_picture = ? WHERE username = ?";
         $stmt = $conn->prepare($sql);
@@ -59,7 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile-picture'])) 
         }
         $stmt->close();
     } else {
-        $_SESSION['error'] = 'Failed to upload file.';
+        error_log("File upload failed. PHP error: " . error_get_last()['message']);
+        $_SESSION['error'] = 'Failed to upload file. Please check server logs.';
     }
 }
 

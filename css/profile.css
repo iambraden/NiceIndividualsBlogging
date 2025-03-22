@@ -104,7 +104,7 @@ button {
     width: 300px;
     padding: 5px 10px 5px 30px;
     font-size: 16px;
-    background: white url('res/search.png') no-repeat 5px center;
+    background: white url('../res/search.png') no-repeat 5px center;
     background-size: 20px 20px;
 }
 
