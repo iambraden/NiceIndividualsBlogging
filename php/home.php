@@ -5,7 +5,7 @@ $isLoggedIn = isset($_SESSION['username']);
 
 // Query posts from database
 $posts = [];
-$sql = "SELECT p.id, p.title, p.content, p.created_at, u.username, u.profile_picture 
+$sql = "SELECT p.id, p.title, p.content, p.topic, p.created_at, u.username, u.profile_picture 
         FROM posts p 
         JOIN users u ON p.user_id = u.id 
         ORDER BY p.created_at DESC";
@@ -83,6 +83,15 @@ try {
                     <label for="postTitle"><b>Title</b></label>
                     <input type="text" placeholder="Title your post" name="postTitle" required>
                 </div>
+                
+                <div class="form-group">
+                    <div class="topic-rg">
+                        <p><b>Topic</b></p>
+                        <label><input type="radio" name="postTopic" value="general" checked>General</label>
+                        <label><input type="radio" name="postTopic" value="coursework">Coursework</label>
+                        <label><input type="radio" name="postTopic" value="politice">Politics</label>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="postBody"><b>Content</b></label>
@@ -149,7 +158,7 @@ try {
                     </div>
                     <h2><?php echo htmlspecialchars($post['title']); ?></h2>
                     <p><?php echo htmlspecialchars($post['content']); ?></p>
-                    <p class="post-date">Posted on: <?php echo date('M d, Y', strtotime($post['created_at'])); ?></p>
+                    <p class="post-date">Posted to <?php echo htmlspecialchars(ucfirst($post['topic']))?> on: <?php echo date('M d, Y', strtotime($post['created_at'])); ?></p>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>

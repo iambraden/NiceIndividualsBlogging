@@ -249,6 +249,7 @@ button {
     gap: 15px;
 }
 
+/* for create post form */
 .submit-post-button,
 .cancel-post-button {
     padding: 12px 20px;

@@ -14,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // get form data
     $title = trim($_POST['postTitle']);
     $body = trim($_POST['postBody']);
+    $topic = trim($_POST['postTopic']);
     $username = $_SESSION['username'];
     
     // validate input
@@ -33,10 +34,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 
     //insert post into database linked to user's id
-    $sql = "INSERT INTO posts (user_id, title, content, created_at)
-            VALUES (?,?,?,NOW())";
+    $sql = "INSERT INTO posts (user_id, title, content, topic, created_at)
+            VALUES (?,?,?,?,NOW())";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iss", $user_id, $title, $body);
+    $stmt->bind_param("isss", $user_id, $title, $body, $topic);
 
     if( $stmt->execute() ) {
         //redirect to homepage w/ success message
