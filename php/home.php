@@ -1,6 +1,25 @@
 <?php
 session_start();
+require_once 'db.php';
 $isLoggedIn = isset($_SESSION['username']);
+
+// Query posts from database
+$posts = [];
+$sql = "SELECT p.id, p.title, p.content, p.created_at, u.username, u.profile_picture 
+        FROM posts p 
+        JOIN users u ON p.user_id = u.id 
+        ORDER BY p.created_at DESC";
+        
+try {
+    $result = $conn->query($sql);
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $posts[] = $row;
+        }
+    }
+} catch (Exception $e) {
+    error_log("Error fetching posts: " . $e->getMessage());
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,27 +99,28 @@ $isLoggedIn = isset($_SESSION['username']);
     <?php endif; ?>
 
     <div class="posts-container">
-        <div class="post">
-            <div class="post-header">
-                <span class="username">Jane Doe1</span>
+        <?php if (empty($posts)): ?>
+            <div class="post">
+                <p>No posts available yet. Be the first to create a post!</p>
             </div>
-            <h2>Post Title 1</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
-        </div>
-        <div class="post">
-            <div class="post-header">
-                <span class="username">Jane Doe2</span>
-            </div>
-            <h2>Post Title 2</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
-        </div>
-        <div class="post">
-            <div class="post-header">
-                <span class="username">Jane Doe3</span>
-            </div>
-            <h2>Post Title 3</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
-        </div>
+        <?php else: ?>
+            <?php foreach ($posts as $post): ?>
+                <div class="post">
+                    <div class="post-header">
+                        <?php 
+                        $profilePic = !empty($post['profile_picture']) 
+                            ? '../upload/' . $post['profile_picture'] 
+                            : '../res/user.png';
+                        ?>
+                        <img src="<?php echo htmlspecialchars($profilePic); ?>" alt="User Icon" class="user-icon">
+                        <span class="username"><?php echo htmlspecialchars($post['username']); ?></span>
+                    </div>
+                    <h2><?php echo htmlspecialchars($post['title']); ?></h2>
+                    <p><?php echo htmlspecialchars($post['content']); ?></p>
+                    <p class="post-date">Posted on: <?php echo date('M d, Y', strtotime($post['created_at'])); ?></p>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 
     <script src="../scripts/home.js"></script>

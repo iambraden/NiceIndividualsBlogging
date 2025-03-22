@@ -39,15 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // add icons to each post
     const posts = document.querySelectorAll(".post");
     posts.forEach(post => {
-        const postHeader = post.querySelector(".post-header");
-
-        const userIcon = document.createElement("img");
-        userIcon.src = "../res/user.png";
-        userIcon.alt = "User Icon";
-        userIcon.classList.add("user-icon");
-
-        postHeader.insertBefore(userIcon, postHeader.firstChild);
-
         const postIcons = document.createElement("div");
         postIcons.classList.add("post-icons");
 
