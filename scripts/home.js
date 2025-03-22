@@ -157,13 +157,13 @@ function closeForm() {
     }
 }
 
-// Functions for edit and delete
+// functions for edit and delete
 function editPost(postId) {
-    // Get the post element
+    // get the post element
     const postElement = document.querySelector(`.post:has(button[onclick="editPost(${postId})"])`);
     
     if (!postElement) {
-        // Try an alternative selector for older browsers
+        // try an alternative selector for older browsers
         const posts = document.querySelectorAll('.post');
         for (let post of posts) {
             if (post.querySelector(`button[onclick="editPost(${postId})"]`)) {
@@ -174,16 +174,16 @@ function editPost(postId) {
     }
     
     if (postElement) {
-        // Extract post data
+        // extract post data
         const title = postElement.querySelector('h2').textContent;
         const content = postElement.querySelector('p:not(.post-date)').textContent;
         
-        // Fill the edit form
+        // fill the edit form
         document.getElementById('edit-post-id').value = postId;
         document.getElementById('editPostTitle').value = title;
         document.getElementById('editPostBody').value = content;
         
-        // Show the edit form
+        // show the edit form
         openEditForm();
     } else {
         console.error('Post element not found');
@@ -211,7 +211,25 @@ function closeEditForm() {
 function deletePost(postId) {
     if (confirm('Are you sure you want to delete this post?')) {
         console.log('Delete post:', postId);
-        // Send AJAX request to delete post
-        window.location.href = 'delete_post.php?id=' + postId;
+        //DONE: switch from GET to POST for deletion
+
+        // make a form
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'delete_post.php';
+        form.style.display = 'none';
+        
+        // hidden input for post ID
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'postId';
+        input.value = postId;
+        
+        // add the input to the form, and add the form to the document
+        form.appendChild(input);
+        document.body.appendChild(form);
+        
+        // submit the form to delete_post.php
+        form.submit();
     }
 }

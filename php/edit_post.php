@@ -2,27 +2,27 @@
 require_once "db.php";
 session_start();
 
-// Check if user is logged in
+// check if user is logged in
 if (!isset($_SESSION['username'])) {
     header("Location: signin.php");
     exit();
 }
 
-// Check if form was submitted
+// check if form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get form data
+    // get form data
     $post_id = $_POST['postId'];
     $title = trim($_POST['postTitle']);
     $body = trim($_POST['postBody']);
     $username = $_SESSION['username'];
     
-    // Validate input
+    // validate input
     if (empty($title) || empty($body) || empty($post_id)) {
         header("Location: home.php?error=emptyfields");
         exit();
     }
     
-    // Verify user is the post owner
+    // verify user is the post owner
     $sql = "SELECT p.id FROM posts p JOIN users u ON p.user_id = u.id 
             WHERE p.id = ? AND u.username = ?";
     $stmt = $conn->prepare($sql);
@@ -31,13 +31,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->store_result();
     
     if ($stmt->num_rows < 1) {
-        // Not the post owner or post doesn't exist
+        // not the post owner or post doesn't exist
         header("Location: home.php?error=unauthorized");
         exit();
     }
     $stmt->close();
     
-    // Update the post
+    // update the post
     $sql = "UPDATE posts SET title = ?, content = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssi", $title, $body, $post_id);
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
     exit();
 } else {
-    // If not a POST request, redirect to home
+    // if not a POST request, redirect to home
     header("Location: home.php");
     exit();
 }
