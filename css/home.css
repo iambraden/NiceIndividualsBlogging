@@ -299,9 +299,62 @@ button {
 }
 
 .post-header {
+    position: relative;
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+}
+
+.post-options {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.post-options-btn {
+    background: none;
+    border: none;
+    background-color: #6fb5ff;
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.post-options-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.post-options-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    z-index: 10;
+    min-width: 100px;
+}
+
+.post-options-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    text-align: left;
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.post-options-dropdown button:hover {
+    background-color: #f0f0f0;
+}
+
+.post-options.active .post-options-dropdown {
+    display: block;
 }
 
 .username {

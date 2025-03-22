@@ -81,10 +81,51 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // add escape key listener to close the form
     document.addEventListener("keydown", function(event) {
-        if (event.key === "Escape" && popup && popup.style.display === "flex") {
-            closeForm();
+        const postForm = document.getElementById("postForm");
+        const editForm = document.getElementById("editPostForm");
+        
+        if (event.key === "Escape") {
+            if (postForm && postForm.style.display === "flex") {
+                closeForm();
+            }
+            if (editForm && editForm.style.display === "flex") {
+                closeEditForm();
+            }
         }
     });
+
+    // handle post options dropdown menus
+    const postOptionsBtns = document.querySelectorAll('.post-options-btn');
+    postOptionsBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            // close all other dropdowns first
+            document.querySelectorAll('.post-options').forEach(options => {
+                if (options !== this.parentElement) {
+                    options.classList.remove('active');
+                }
+            });
+            // toggle this dropdown
+            this.parentElement.classList.toggle('active');
+        });
+    });
+
+    // close post options when clicking outside
+    document.addEventListener('click', function() {
+        document.querySelectorAll('.post-options').forEach(options => {
+            options.classList.remove('active');
+        });
+    });
+    
+    // add click outside to close edit form too
+    const editForm = document.getElementById("editPostForm");
+    if (editForm) {
+        editForm.addEventListener("click", function(event) {
+            if (event.target === editForm) {
+                closeEditForm();
+            }
+        });
+    }
 });
 
 // functions for the post creation popup
@@ -113,5 +154,64 @@ function closeForm() {
         const bodyInput = document.querySelector("textarea[name='postBody']");
         if (titleInput) titleInput.value = "";
         if (bodyInput) bodyInput.value = "";
+    }
+}
+
+// Functions for edit and delete
+function editPost(postId) {
+    // Get the post element
+    const postElement = document.querySelector(`.post:has(button[onclick="editPost(${postId})"])`);
+    
+    if (!postElement) {
+        // Try an alternative selector for older browsers
+        const posts = document.querySelectorAll('.post');
+        for (let post of posts) {
+            if (post.querySelector(`button[onclick="editPost(${postId})"]`)) {
+                postElement = post;
+                break;
+            }
+        }
+    }
+    
+    if (postElement) {
+        // Extract post data
+        const title = postElement.querySelector('h2').textContent;
+        const content = postElement.querySelector('p:not(.post-date)').textContent;
+        
+        // Fill the edit form
+        document.getElementById('edit-post-id').value = postId;
+        document.getElementById('editPostTitle').value = title;
+        document.getElementById('editPostBody').value = content;
+        
+        // Show the edit form
+        openEditForm();
+    } else {
+        console.error('Post element not found');
+    }
+}
+
+function openEditForm() {
+    const editForm = document.getElementById("editPostForm");
+    if (editForm) {
+        editForm.style.display = "flex";
+        editForm.style.alignItems = "center";
+        editForm.style.justifyContent = "center";
+        document.body.style.overflow = "hidden";
+    }
+}
+
+function closeEditForm() {
+    const editForm = document.getElementById("editPostForm");
+    if (editForm) {
+        editForm.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+}
+
+function deletePost(postId) {
+    if (confirm('Are you sure you want to delete this post?')) {
+        console.log('Delete post:', postId);
+        // Send AJAX request to delete post
+        window.location.href = 'delete_post.php?id=' + postId;
     }
 }

@@ -96,6 +96,28 @@ try {
             </form>
         </div>
     </div>
+    <div class="post-popup" id="editPostForm" style="display: none;">
+        <div class="form-container">
+            <h3>Edit Post</h3>
+            <form action="edit_post.php" method="POST" class="postForm-container">
+                <input type="hidden" id="edit-post-id" name="postId">
+                <div class="form-group">
+                    <label for="editPostTitle"><b>Title</b></label>
+                    <input type="text" placeholder="Title your post" name="postTitle" id="editPostTitle" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="editPostBody"><b>Content</b></label>
+                    <textarea placeholder="Enter your post content" name="postBody" id="editPostBody" rows="6" required></textarea>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="submit-post-button">Update Post</button>
+                    <button type="button" class="cancel-post-button" onclick="closeEditForm()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <?php endif; ?>
 
     <div class="posts-container">
@@ -114,6 +136,16 @@ try {
                         ?>
                         <img src="<?php echo htmlspecialchars($profilePic); ?>" alt="User Icon" class="user-icon">
                         <span class="username"><?php echo htmlspecialchars($post['username']); ?></span>
+                        
+                        <?php if ($isLoggedIn && $_SESSION['username'] === $post['username']): ?>
+                        <div class="post-options">
+                            <button class="post-options-btn">⋮</button>
+                            <div class="post-options-dropdown">
+                                <button onclick="editPost(<?php echo $post['id']; ?>)">Edit</button>
+                                <button onclick="deletePost(<?php echo $post['id']; ?>)">Delete</button>
+                            </div>
+                        </div>
+                        <?php endif; ?>
                     </div>
                     <h2><?php echo htmlspecialchars($post['title']); ?></h2>
                     <p><?php echo htmlspecialchars($post['content']); ?></p>
