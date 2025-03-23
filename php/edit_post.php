@@ -16,9 +16,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $body = trim($_POST['postBody']);
     $username = $_SESSION['username'];
     
+    // Initialize redirect URL once at the top
+    $redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : 'home.php';
+    
+    // helper function to append parameters to the redirect url
+    function appendToUrl($url, $param) {
+        return $url . (strpos($url, '?') !== false ? '&' : '?') . $param;
+    }
+    
     // validate input
     if (empty($title) || empty($body) || empty($post_id)) {
-        header("Location: home.php?error=emptyfields");
+        header("Location: " . appendToUrl($redirect_url, 'error=emptyfields'));
         exit();
     }
     
@@ -32,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if ($stmt->num_rows < 1) {
         // not the post owner or post doesn't exist
-        header("Location: home.php?error=unauthorized");
+        header("Location: " . appendToUrl('home.php', 'error=unauthorized'));
         exit();
     }
     $stmt->close();
@@ -43,9 +51,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssi", $title, $body, $post_id);
     
     if ($stmt->execute()) {
-        header("Location: home.php?post=updated");
+        header("Location: " . appendToUrl($redirect_url, 'post=success'));
     } else {
-        header("Location: home.php?error=dberror");
+        // handle db error
+        error_log("Execution failed: " . $stmt->error);
+        header("Location: " . appendToUrl($redirect_url, 'error=dberror'));
     }
     $stmt->close();
     exit();

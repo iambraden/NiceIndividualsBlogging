@@ -3,75 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const popup = document.getElementById("postForm");
     if (popup) {
         popup.style.display = "none";
-    }
-    
-    const dropdownButtons = document.querySelectorAll('.dropdown-button');
-    const dropdownContents = document.querySelectorAll('.dropdown-content');
-
-    // toggle dropdown content visibility on button click
-    dropdownButtons.forEach(button => {
-        button.addEventListener('click', function(event) {
-            event.stopPropagation();
-            const dropdownContent = this.nextElementSibling;
-            dropdownContent.classList.toggle('show');
-        });
-    });
-
-    // prevent dropdown content from closing when clicked inside
-    dropdownContents.forEach(content => {
-        content.addEventListener('click', function(event) {
-            event.stopPropagation();
-        });
-    });
-
-    // close dropdowns when clicking outside
-    window.addEventListener('click', function(event) {
-        if (!event.target.matches('.dropdown-button')) {
-            const dropdowns = document.querySelectorAll('.dropdown-content');
-            dropdowns.forEach(dropdown => {
-                if (dropdown.classList.contains('show')) {
-                    dropdown.classList.remove('show');
-                }
-            });
-        }
-    });
-
-    // add icons to each post
-    const posts = document.querySelectorAll(".post");
-    posts.forEach(post => {
-        const postIcons = document.createElement("div");
-        postIcons.classList.add("post-icons");
-
-        const thumbsUp = document.createElement("img");
-        thumbsUp.src = "../res/thumbs-up.png";
-        thumbsUp.alt = "Thumbs Up";
-        thumbsUp.classList.add("icon");
-
-        const thumbsDown = document.createElement("img");
-        thumbsDown.src = "../res/thumbs-down.png";
-        thumbsDown.alt = "Thumbs Down";
-        thumbsDown.classList.add("icon");
-
-        const comment = document.createElement("img");
-        comment.src = "../res/comment-alt.png";
-        comment.alt = "Comment";
-        comment.classList.add("icon");
-
-        const share = document.createElement("img");
-        share.src = "../res/share.png";
-        share.alt = "Share";
-        share.classList.add("icon");
-
-        postIcons.appendChild(thumbsUp);
-        postIcons.appendChild(thumbsDown);
-        postIcons.appendChild(comment);
-        postIcons.appendChild(share);
-
-        post.appendChild(postIcons);
-    });
-    
-    // setup popup form event listeners
-    if (popup) {
+        
+        // setup popup form event listeners
         popup.addEventListener("click", function(event) {
             if (event.target === popup) {
                 closeForm();
@@ -224,16 +157,9 @@ function deletePost(postId) {
         input.type = 'hidden';
         input.name = 'postId';
         input.value = postId;
-
-        // add redirect URL input
-        const redirectInput = document.createElement('input');
-        redirectInput.type = 'hidden';
-        redirectInput.name = 'redirect_url';
-        redirectInput.value = window.location.pathname;
-
+        
         // add the input to the form, and add the form to the document
         form.appendChild(input);
-        form.appendChild(redirectInput);
         document.body.appendChild(form);
         
         // submit the form to delete_post.php

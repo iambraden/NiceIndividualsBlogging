@@ -8,12 +8,20 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
+// initialize redirect url once at the top
+$redirect_url = isset($_POST['redirect_url']) ? $_POST['redirect_url'] : 'home.php';
+
+// helper function to append parameters to the redirect url
+function appendToUrl($url, $param) {
+    return $url . (strpos($url, '?') !== false ? '&' : '?') . $param;
+}
+
 // get post ID from either GET or POST
 $post_id = $_GET['id'] ?? $_POST['postId'] ?? null;
 
 // validate post ID exists
 if (empty($post_id)) {
-    header("Location: home.php?error=missingid");
+    header("Location: " . appendToUrl($redirect_url, 'error=missingid'));
     exit();
 }
 
@@ -27,7 +35,7 @@ $stmt->store_result();
 
 if ($stmt->num_rows < 1) {
     // not the post owner or post doesn't exist
-    header("Location: home.php?error=unauthorized");
+    header("Location: " . appendToUrl($redirect_url, 'error=unauthorized'));
     exit();
 }
 $stmt->close();
@@ -38,9 +46,11 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $post_id);
 
 if ($stmt->execute()) {
-    header("Location: home.php?post=deleted");
+    header("Location: " . appendToUrl($redirect_url, 'post=deleted'));
 } else {
-    header("Location: home.php?error=dberror");
+    // handle db error
+    error_log("Execution failed: " . $stmt->error);
+    header("Location: " . appendToUrl($redirect_url, 'error=dberror'));
 }
 $stmt->close();
 exit();

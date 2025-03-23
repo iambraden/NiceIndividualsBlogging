@@ -102,6 +102,8 @@ try {
                     <button type="submit" class="submit-post-button">Submit Post</button>
                     <button type="button" class="cancel-post-button" onclick="closeForm()">Cancel</button>
                 </div>
+                <!--hidden form to give the redirect url to create_post -->
+                <input type="hidden" name="redirect_url" value="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             </form>
         </div>
     </div>
@@ -124,6 +126,9 @@ try {
                     <button type="submit" class="submit-post-button">Update Post</button>
                     <button type="button" class="cancel-post-button" onclick="closeEditForm()">Cancel</button>
                 </div>
+
+                <!--hidden form to give the redirect url to create_post -->
+                <input type="hidden" name="redirect_url" value="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             </form>
         </div>
     </div>
