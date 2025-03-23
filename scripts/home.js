@@ -1,3 +1,6 @@
+let currentTopicFilter = 'all';
+let currentSearchTerm = '';
+
 document.addEventListener("DOMContentLoaded", () => {
     // hide the form popup on page load
     const popup = document.getElementById("postForm");
@@ -131,6 +134,67 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+//clean up the search input and send to search function
+function handleSearch(event){
+    event.preventDefault();
+
+    const searchInput = document.getElementById('search-input');
+    const searchValue = searchInput.value.trim();
+
+    searchPosts(searchValue);
+
+    return false;
+}
+
+function searchPosts(key){
+    currentSearchTerm = key.toLowerCase();
+    applyFilters();
+}
+
+//moved next to search for simplicity
+//function to filter posts by topic
+function filterPosts(topic, event){
+    // make sure only one button is active
+    const topicButtons = document.querySelectorAll('.topic-button');
+    topicButtons.forEach(button => {
+        button.classList.remove('active');
+    });
+
+    // make the clicked button active
+    event.target.classList.add('active');
+    
+    // save the current topic filter
+    currentTopicFilter = topic.toLowerCase();
+    
+    // apply both filters
+    applyFilters();
+}
+
+// helper function to apply search and topic filters at the same time
+// (to prevent them overriding each other)
+function applyFilters(){
+    const posts = document.querySelectorAll('.post');
+    
+    posts.forEach(post => {
+        // get post title and topic
+        const postTitle = post.querySelector('h2').textContent.toLowerCase();
+        const postTopic = post.querySelector('.post-date').textContent.toLowerCase();
+        
+        // check if it matches both filters
+        const matchesTopic = (currentTopicFilter === 'all' || 
+                             postTopic.includes(currentTopicFilter));
+        const matchesSearch = (currentSearchTerm === '' || 
+                              postTitle.includes(currentSearchTerm));
+        
+        // only show if it matches both filters
+        if(matchesTopic && matchesSearch){
+            post.style.display = 'block';
+        }else{
+            post.style.display = 'none';
+        }
+    });
+}
+
 // functions for the post creation popup
 function openForm() {
     console.log("openForm function called");
@@ -242,36 +306,4 @@ function deletePost(postId) {
         // submit the form to delete_post.php
         form.submit();
     }
-}
-
-function filterPosts(topic, event){
-    //make sure only one button is active
-    const topicButtons = document.querySelectorAll('.topic-button');
-    topicButtons.forEach(button =>{
-        button.classList.remove('active');
-    });
-
-    //make the clicked button active
-    event.target.classList.add('active');
-
-    //get all posts
-    const posts = document.querySelectorAll('.post');
-
-    //if "all" is selected, just display all the posts
-    if(topic === 'all'){
-        posts.forEach(post =>{
-            post.style.display = 'block';
-        })
-        return;
-    }
-
-    //otherwise filter the posts by their topic
-    posts.forEach(post => {
-        const postTopic = post.querySelector('.post-date').textContent.toLowerCase();
-        if(postTopic.includes(topic.toLowerCase())){
-            post.style.display = 'block';
-        }else{
-            post.style.display = 'none';
-        }
-    });
 }

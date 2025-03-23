@@ -37,12 +37,15 @@ try {
                 <div class="dropdown">
                     <button class="dropdown-button">Filter ▾</button>
                     <div class="dropdown-content">
-                        <label><input type="checkbox" value="posts" checked> Posts</label>
-                        <label><input type="checkbox" value="profile" checked> Profiles</label>
-                        <label><input type="checkbox" value="option3" checked> Option 3</label>
+                        <label><input type="checkbox" value="posts" checked>Posts</label>
+                        <label><input type="checkbox" value="users" checked>Users</label>
                     </div>
                 </div>
-                <input type="text" placeholder="Search..." class="search-bar">
+                <form id="search-form" method="GET" action="" class="search-form" onsubmit="return handleSearch(event)">
+                    <input type="text" name="search" id="search-input" placeholder="Search..." class="search-bar" 
+                           value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
+                    <button type="submit" class="search-button">Search</button>
+                </form>
             </div>
 
             <div class="right-container">
@@ -171,7 +174,7 @@ try {
                         </div>
                         <?php endif; ?>
                     </div>
-                    <h2><?php echo htmlspecialchars($post['title']); ?></h2>
+                    <h2 class="post-title"><?php echo htmlspecialchars($post['title']); ?></h2>
                     <p><?php echo htmlspecialchars($post['content']); ?></p>
                     <p class="post-date">Posted to <?php echo htmlspecialchars(ucfirst($post['topic']))?> on: <?php echo date('M d, Y', strtotime($post['created_at'])); ?></p>
                 </div>
