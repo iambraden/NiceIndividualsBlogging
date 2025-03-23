@@ -138,6 +138,44 @@ button {
     background-color: #ADBBDA;
 }
 
+.topic-filter-container {
+    max-width: 800px;
+    margin: 20px auto 0;
+    padding: 15px 20px;
+    background-color: #99CCF8;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.topic-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.topic-button {
+    padding: 8px 15px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.topic-button:hover {
+    background-color: #ADBBDA;
+}
+
+.topic-button.active {
+    background-color: #1d6fea;
+    color: white;
+    border-color: #1d6fea;
+}
+
 .posts-container {
     display: flex;
     flex-direction: column;

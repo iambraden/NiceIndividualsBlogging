@@ -68,6 +68,16 @@ try {
         </div>
     </header>
 
+    <div class="topic-filter-container">
+        <h3>Filter by Topic:</h3>
+        <div class="topic-buttons">
+            <button class="topic-button active" data-topic="all">All Topics</button>
+            <button class="topic-button" data-topic="general">General</button>
+            <button class="topic-button" data-topic="coursework">Coursework</button>
+            <button class="topic-button" data-topic="politics">Politics</button>
+        </div>
+    </div>
+
     <div class="sidebar">
         <button class="sidebar-button" onclick="window.location.href='home.php'"><strong>Home</strong></button>
         <button class="sidebar-button" onclick="window.location.href='profile.php'">My Profile</button>
