@@ -3,7 +3,7 @@ session_start();
 require_once 'db.php';
 $isLoggedIn = isset($_SESSION['username']);
 
-// Query posts from database
+// query posts from database
 $posts = [];
 $sql = "SELECT p.id, p.title, p.content, p.topic, p.created_at, u.username, u.profile_picture 
         FROM posts p 
@@ -37,8 +37,8 @@ try {
                 <div class="dropdown">
                     <button class="dropdown-button">Filter ▾</button>
                     <div class="dropdown-content">
-                        <label><input type="checkbox" value="posts" checked>Posts</label>
-                        <label><input type="checkbox" value="users" checked>Users</label>
+                        <label><input type="checkbox" id="filter-posts" value="posts" checked>Posts</label>
+                        <label><input type="checkbox" id="filter-users" value="users" checked>Users</label>
                     </div>
                 </div>
                 <form id="search-form" method="GET" action="" class="search-form" onsubmit="return handleSearch(event)">

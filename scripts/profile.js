@@ -1,3 +1,6 @@
+let currentTopicFilter = 'all';
+let currentSearchTerm = '';
+
 document.addEventListener("DOMContentLoaded", () => {
     // hide the form popup on page load
     const popup = document.getElementById("postForm");
@@ -149,6 +152,64 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 3000); 
     }
 });
+
+//clean up the search input and send to search function
+function handleSearch(event){
+    event.preventDefault();
+
+    const searchInput = document.getElementById('search-input');
+    const searchValue = searchInput.value.trim();
+
+    searchPosts(searchValue);
+
+    return false;
+}
+
+function searchPosts(key){
+    currentSearchTerm = key.toLowerCase();
+    applyFilters();
+}
+
+function applyFilters(){
+    const posts = document.querySelectorAll('.post');
+    //get search filter info
+    const userFilter = document.getElementById("filter-users").checked;
+    const postFilter = document.getElementById("filter-posts").checked;
+
+    posts.forEach(post => {
+        // get post title and topic
+        const postTitle = post.querySelector('h2').textContent.toLowerCase();
+        const postTopic = post.querySelector('.post-date').textContent.toLowerCase();
+        const postUser = post.querySelector('.username').textContent.toLowerCase();
+        
+        // check if it matches topic filter
+        const matchesTopic = (currentTopicFilter === 'all' || postTopic.includes(currentTopicFilter));
+        
+        // determine search matches based on checked filters
+        let matchesSearch = false;
+        
+        // if no search term, everything matches
+        if (currentSearchTerm === '') {
+            matchesSearch = true;
+        } else {
+            // check title/content if post filter is on
+            const titleMatches = postFilter && postTitle.includes(currentSearchTerm);
+            
+            // check username if user filter is on
+            const userMatches = userFilter && postUser.includes(currentSearchTerm);
+            
+            // match if either condition is true based on selected filters
+            matchesSearch = titleMatches || userMatches;
+        }
+        
+        // only show if it matches both the topic filter and search criteria
+        if (matchesTopic && matchesSearch) {
+            post.style.display = 'block';
+        } else {
+            post.style.display = 'none';
+        }
+    });
+}
 
 
 // functions for the post creation popup

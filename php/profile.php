@@ -8,27 +8,34 @@ if (!$isLoggedIn) {
     exit();
 }
 
-// Query posts from database
+//moved above query to check session username against database
+$username = $_SESSION['username'];
+
+// query posts from database and display logged in user's posts
 $posts = [];
 $sql = "SELECT p.id, p.title, p.content, p.topic, p.created_at, u.username, u.profile_picture 
         FROM posts p 
         JOIN users u ON p.user_id = u.id 
+        WHERE u.username = ?
         ORDER BY p.created_at DESC";
         
 try {
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
     if ($result) {
         while ($row = $result->fetch_assoc()) {
             $posts[] = $row;
         }
     }
+    $stmt->close();
 } catch (Exception $e) {
     error_log("Error fetching posts: " . $e->getMessage());
 }
 
-$username = $_SESSION['username'];
-
-// Fetch user data from the database
+// fetch user data from the database
 $sql = "SELECT profile_picture FROM users WHERE username = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('s', $username);
@@ -38,14 +45,14 @@ $stmt->fetch();
 $stmt->close();
 $conn->close();
 
-// Set default profile picture if none is uploaded
+// set default profile picture if none is uploaded
 if (empty($profile_picture)) {
     $profile_picture = '../res/user.png';
 } else {
     $profile_picture = '../upload/' . $profile_picture;
 }
 
-// Display success or error messages
+// display success or error messages
 $success = $_SESSION['success'] ?? '';
 $error = $_SESSION['error'] ?? '';
 unset($_SESSION['success']);
@@ -64,16 +71,19 @@ unset($_SESSION['error']);
         <input type="hidden" id="profile-picture" value="<?php echo htmlspecialchars($profile_picture); ?>">
         <h1>CampusConnect</h1>
         <div class="header-container">
-            <div class="center-container">
+        <div class="center-container">
                 <div class="dropdown">
                     <button class="dropdown-button">Filter ▾</button>
                     <div class="dropdown-content">
-                        <label><input type="checkbox" value="posts" checked> Posts</label>
-                        <label><input type="checkbox" value="profile" checked> Profiles</label>
-                        <label><input type="checkbox" value="option3" checked> Option 3</label>
+                        <label><input type="checkbox" id="filter-posts" value="posts" checked>Posts</label>
+                        <label><input type="checkbox" id="filter-users" value="users" checked>Users</label>
                     </div>
                 </div>
-                <input type="text" placeholder="Search..." class="search-bar">
+                <form id="search-form" method="GET" action="home.php" class="search-form">
+                    <input type="text" name="search" id="search-input" placeholder="Search..." class="search-bar" 
+                           value="<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
+                    <button type="submit" class="search-button">Search</button>
+                </form>
             </div>
 
             <div class="right-container">
