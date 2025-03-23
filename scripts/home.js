@@ -126,6 +126,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    //event handling for topic buttons
+
 });
 
 // functions for the post creation popup
@@ -239,4 +242,36 @@ function deletePost(postId) {
         // submit the form to delete_post.php
         form.submit();
     }
+}
+
+function filterPosts(topic, event){
+    //make sure only one button is active
+    const topicButtons = document.querySelectorAll('.topic-button');
+    topicButtons.forEach(button =>{
+        button.classList.remove('active');
+    });
+
+    //make the clicked button active
+    event.target.classList.add('active');
+
+    //get all posts
+    const posts = document.querySelectorAll('.post');
+
+    //if "all" is selected, just display all the posts
+    if(topic === 'all'){
+        posts.forEach(post =>{
+            post.style.display = 'block';
+        })
+        return;
+    }
+
+    //otherwise filter the posts by their topic
+    posts.forEach(post => {
+        const postTopic = post.querySelector('.post-date').textContent.toLowerCase();
+        if(postTopic.includes(topic.toLowerCase())){
+            post.style.display = 'block';
+        }else{
+            post.style.display = 'none';
+        }
+    });
 }

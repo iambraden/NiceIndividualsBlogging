@@ -71,10 +71,10 @@ try {
     <div class="topic-filter-container">
         <h3>Filter by Topic:</h3>
         <div class="topic-buttons">
-            <button class="topic-button active" data-topic="all">All Topics</button>
-            <button class="topic-button" data-topic="general">General</button>
-            <button class="topic-button" data-topic="coursework">Coursework</button>
-            <button class="topic-button" data-topic="politics">Politics</button>
+            <button class="topic-button active" onclick="filterPosts('all', event)">All Topics</button>
+            <button class="topic-button" onclick="filterPosts('general', event)">General</button>
+            <button class="topic-button" onclick="filterPosts('coursework', event)">Coursework</button>
+            <button class="topic-button" onclick="filterPosts('politics', event)">Politics</button>
         </div>
     </div>
 
@@ -99,7 +99,7 @@ try {
                         <p><b>Topic</b></p>
                         <label><input type="radio" name="postTopic" value="general" checked>General</label>
                         <label><input type="radio" name="postTopic" value="coursework">Coursework</label>
-                        <label><input type="radio" name="postTopic" value="politice">Politics</label>
+                        <label><input type="radio" name="postTopic" value="politics">Politics</label>
                     </div>
                 </div>
 
