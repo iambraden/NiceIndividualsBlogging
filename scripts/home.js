@@ -146,6 +146,14 @@ function handleSearch(event){
     return false;
 }
 
+//live update the search
+const searchInput = document.getElementById('search-input');
+if (searchInput){
+    searchInput.addEventListener('input', function() {
+        searchPosts(this.value.trim());
+    });
+}
+
 function searchPosts(key){
     currentSearchTerm = key.toLowerCase();
     applyFilters();
