@@ -438,3 +438,38 @@ button {
     height: 20px;
     cursor: pointer;
 }
+
+.comments-section {
+    margin-top: 10px;
+}
+
+.comment {
+    margin-bottom: 10px;
+}
+
+.comment-username {
+    font-weight: bold;
+}
+
+.comment-date {
+    margin-left: 5px;
+    font-size: 0.8em;
+}
+
+.comment-text {
+    margin-top: 3px;
+}
+
+.comment-form {
+    margin-top: 10px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    min-height: 60px;
+}
+
+.comment-submit-btn {
+    float: right;
+    margin-top: 5px;
+}

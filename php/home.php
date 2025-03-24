@@ -179,11 +179,27 @@ try {
                     <p class="post-date">Posted to <?php echo htmlspecialchars(ucfirst($post['topic']))?> on: <?php echo date('M d, Y', strtotime($post['created_at'])); ?></p>
 
                     <div class="post-icons">
-                        <img src="../res/thumbs-up.png" alt="Thumbs Up" class="icon" onclick="handleLike()">
-                        <img src="../res/thumbs-down.png" alt="Thumbs Down" class="icon" onclick="handleDislike()">
-                        <img src="../res/comment-alt.png" alt="Comment" class="icon" onclick="handleComments()">
-                        <img src="../res/share.png" alt="Share" class="icon" onclick="handleShare()">
-                    </div>s
+                        <img src="../res/thumbs-up.png" alt="Thumbs Up" class="icon" onclick="handleLike(<?php echo $post['id']; ?>)">
+                        <img src="../res/thumbs-down.png" alt="Thumbs Down" class="icon" onclick="handleDislike(<?php echo $post['id']; ?>)">
+                        <img src="../res/comment-alt.png" alt="Comment" class="icon" onclick="handleComments(<?php echo $post['id']; ?>)">
+                        <img src="../res/share.png" alt="Share" class="icon" onclick="handleShare(<?php echo $post['id']; ?>)">
+                    </div>
+
+                    <div id="comments-section-<?php echo $post['id']; ?>" class="comments-section" style="display: none;">
+                        <div id="comments-container-<?php echo $post['id']; ?>" class="comments-container">
+                            <p class="loading-comments">Loading comments...</p>
+                        </div>
+
+                        <?php if ($isLoggedIn): ?>
+                        <form class="comment-form" action="add_comment.php" method="POST">
+                            <input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
+                            <textarea name="comment" placeholder="Write a comment..." required></textarea>
+                            <button type="submit" class="comment-submit-btn">Post Comment</button>
+                        </form>
+                        <?php else: ?>
+                        <p class="login-to-comment">Please <a href="signin.php">sign in</a> to comment</p>
+                        <?php endif; ?>
+                    </div>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>

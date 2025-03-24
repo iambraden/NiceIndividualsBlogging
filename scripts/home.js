@@ -313,3 +313,80 @@ function deletePost(postId) {
         form.submit();
     }
 }
+
+// handle comment button click
+function handleComments(postId) {
+    const commentsSection = document.getElementById(`comments-section-${postId}`);
+    
+    // toggle visibility
+    if (commentsSection.style.display === 'none') {
+        commentsSection.style.display = 'block';
+        loadComments(postId);
+    } else {
+        commentsSection.style.display = 'none';
+    }
+}
+
+// fetch comments for a post
+function loadComments(postId) {
+    const commentsContainer = document.getElementById(`comments-container-${postId}`);
+    
+    // get comments via AJAX
+    fetch(`get_comments.php?post_id=${postId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.length === 0) {
+                commentsContainer.innerHTML = '<p class="no-comments">No comments yet.</p>';
+            } else {
+                // display comments
+                commentsContainer.innerHTML = '';
+                data.forEach(comment => {
+                    const commentElement = document.createElement('div');
+                    commentElement.className = 'comment';
+                    
+                    const commentHeader = document.createElement('div');
+                    commentHeader.className = 'comment-header';
+                    
+                    const username = document.createElement('span');
+                    username.className = 'comment-username';
+                    username.textContent = comment.username;
+                    
+                    const date = document.createElement('span');
+                    date.className = 'comment-date';
+                    date.textContent = comment.created_at;
+                    
+                    const commentText = document.createElement('p');
+                    commentText.className = 'comment-text';
+                    commentText.textContent = comment.content;
+                    
+                    commentHeader.appendChild(username);
+                    commentHeader.appendChild(date);
+                    commentElement.appendChild(commentHeader);
+                    commentElement.appendChild(commentText);
+                    
+                    commentsContainer.appendChild(commentElement);
+                });
+            }
+        })
+        .catch(error => {
+            commentsContainer.innerHTML = '<p class="error">Error loading comments. Please try again.</p>';
+            console.error('Error getting comments:', error);
+        });
+}
+
+
+//functions for other icons (TODO)
+function handleLike(postId) {
+    console.log('Like post:', postId);
+    // implement like functionality
+}
+
+function handleDislike(postId) {
+    console.log('Dislike post:', postId);
+    // implement dislike functionality
+}
+
+function handleShare(postId) {
+    console.log('Share post:', postId);
+    // implement share functionality
+}
