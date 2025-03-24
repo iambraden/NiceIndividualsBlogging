@@ -313,19 +313,3 @@ function deletePost(postId) {
         form.submit();
     }
 }
-
-function toggleLike(postId) {
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = 'toggle_like.php';
-    form.style.display = 'none';
-
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'post_id';
-    input.value = postId;
-
-    form.appendChild(input);
-    document.body.appendChild(form);
-    form.submit();
-}
