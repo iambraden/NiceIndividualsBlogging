@@ -177,6 +177,13 @@ try {
                     <h2 class="post-title"><?php echo htmlspecialchars($post['title']); ?></h2>
                     <p><?php echo htmlspecialchars($post['content']); ?></p>
                     <p class="post-date">Posted to <?php echo htmlspecialchars(ucfirst($post['topic']))?> on: <?php echo date('M d, Y', strtotime($post['created_at'])); ?></p>
+
+                    <div class="post-icons">
+                        <img src="../res/thumbs-up.png" alt="Thumbs Up" class="icon" onclick="handleLike()">
+                        <img src="../res/thumbs-down.png" alt="Thumbs Down" class="icon" onclick="handleDislike()">
+                        <img src="../res/comment-alt.png" alt="Comment" class="icon" onclick="handleComments()">
+                        <img src="../res/share.png" alt="Share" class="icon" onclick="handleShare()">
+                    </div>s
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
