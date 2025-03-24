@@ -36,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             // Log database errors
             error_log('Database error: ' . $stmt->error);
+            header('Location: account_settings.php');
         }
     }
 

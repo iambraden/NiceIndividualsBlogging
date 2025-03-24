@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->store_result();
     if ($stmt->num_rows == 0) {
         $errors[] = 'Username does not exist.';
+        exit();
     }
 
     //replace username
@@ -31,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             // Log database errors
             error_log('Database error: ' . $stmt->error);
+            header('Location: account_settings.php');
+            exit();
         }
     }
 

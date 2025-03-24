@@ -1,3 +1,8 @@
+<?php
+session_start();
+$error = $_SESSION['error'] ?? '';
+unset($_SESSION['error']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,6 +73,8 @@
         </div>
     </div>
 
-    <script src="../scripts/signup.js"></script>
+    <script src="../scripts/account_settings_username.js"></script>
+    <script src="../scripts/account_settings_email.js"></script>
+    <script src="../scripts/account_settings_password.js"></script>
 </body>
 </html>
