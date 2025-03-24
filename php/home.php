@@ -47,16 +47,30 @@ try {
                     <button type="submit" class="search-button">Search</button>
                 </form>
             </div>
-
+            <?php
+            if (isset($_POST['accountButton'])) {
+                header("Location: account_settings.php");
+            }
+            if (isset($_POST['adminButton'])) {
+                header("Location: admin_page.php");
+            }
+            ?>
             <div class="right-container">
                 <?php if ($isLoggedIn): ?>
                     <div class="login-container">
-                        <div class="dropdown">
-                            <button class="dropdown-button">Settings ▾</button>
-                            <div class="dropdown-content" style="width: 110px;">
-                                <button>Account</button>
-                                <br>
-                                <button onclick="window.location.href='logout.php'">Logout</button>
+                        <?php if ($_SESSION['role'] ==="admin"): ?>
+                            <form method="post">
+                                <button type="submit" name="adminButton">Admin Page</button>
+                            </form>
+                        <?php endif; ?>
+                    <div class="dropdown">
+                        <button class="dropdown-button">Settings ▾</button>
+                          <div class="dropdown-content" style="width: 110px;">
+                            <form method="post">
+                                <button type="submit" name="accountButton">Account</button>
+                            </form>
+                            <br>
+                            <button onclick="window.location.href='logout.php'">Logout</button>
                             </div>
                         </div>
                     </div>

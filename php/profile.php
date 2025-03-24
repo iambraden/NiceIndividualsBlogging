@@ -85,13 +85,27 @@ unset($_SESSION['error']);
                     <button type="submit" class="search-button">Search</button>
                 </form>
             </div>
-
+            <?php
+            if (isset($_POST['accountButton'])) {
+                header("Location: account_settings.php");
+            }
+            if (isset($_POST['adminButton'])) {
+                header("Location: admin_page.php");
+            }
+            ?>
             <div class="right-container">
-                <div class="login-container">
+                <div class="login-container">                        
+                    <?php if ($_SESSION['role'] ==="admin"): ?>
+                        <form method="post">
+                            <button type="submit" name="adminButton">Admin Page</button>
+                        </form>
+                    <?php endif; ?>
                     <div class="dropdown">
                         <button class="dropdown-button">Settings ▾</button>
                         <div class="dropdown-content" style="width : 110px;">
-                            <button>Account</button>
+                            <form method="post">
+                                <button type="submit" name="accountButton">Account</button>
+                            </form>
                             <br>
                             <button onclick="window.location.href='logout.php'">Logout</button>
                         </div>
