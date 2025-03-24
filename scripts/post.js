@@ -1,80 +1,10 @@
-let currentTopicFilter = 'all';
-let currentSearchTerm = '';
-
 document.addEventListener("DOMContentLoaded", () => {
     // hide the form popup on page load
     const popup = document.getElementById("postForm");
     if (popup) {
         popup.style.display = "none";
-    }
-    
-    const dropdownButtons = document.querySelectorAll('.dropdown-button');
-    const dropdownContents = document.querySelectorAll('.dropdown-content');
-
-    // toggle dropdown content visibility on button click
-    dropdownButtons.forEach(button => {
-        button.addEventListener('click', function(event) {
-            event.stopPropagation();
-            const dropdownContent = this.nextElementSibling;
-            dropdownContent.classList.toggle('show');
-        });
-    });
-
-    // prevent dropdown content from closing when clicked inside
-    dropdownContents.forEach(content => {
-        content.addEventListener('click', function(event) {
-            event.stopPropagation();
-        });
-    });
-
-    // close dropdowns when clicking outside
-    window.addEventListener('click', function(event) {
-        if (!event.target.matches('.dropdown-button')) {
-            const dropdowns = document.querySelectorAll('.dropdown-content');
-            dropdowns.forEach(dropdown => {
-                if (dropdown.classList.contains('show')) {
-                    dropdown.classList.remove('show');
-                }
-            });
-        }
-    });
-
-    // add icons to each post
-    const posts = document.querySelectorAll(".post");
-    posts.forEach(post => {
-        const postIcons = document.createElement("div");
-        postIcons.classList.add("post-icons");
-
-        const thumbsUp = document.createElement("img");
-        thumbsUp.src = "../res/thumbs-up.png";
-        thumbsUp.alt = "Thumbs Up";
-        thumbsUp.classList.add("icon");
-
-        const thumbsDown = document.createElement("img");
-        thumbsDown.src = "../res/thumbs-down.png";
-        thumbsDown.alt = "Thumbs Down";
-        thumbsDown.classList.add("icon");
-
-        const comment = document.createElement("img");
-        comment.src = "../res/comment-alt.png";
-        comment.alt = "Comment";
-        comment.classList.add("icon");
-
-        const share = document.createElement("img");
-        share.src = "../res/share.png";
-        share.alt = "Share";
-        share.classList.add("icon");
-
-        postIcons.appendChild(thumbsUp);
-        postIcons.appendChild(thumbsDown);
-        postIcons.appendChild(comment);
-        postIcons.appendChild(share);
-
-        post.appendChild(postIcons);
-    });
-    
-    // setup popup form event listeners
-    if (popup) {
+        
+        // setup popup form event listeners
         popup.addEventListener("click", function(event) {
             if (event.target === popup) {
                 closeForm();
@@ -129,88 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-
-    // Automatically hide success and error messages after 5 seconds
-    const successMessage = document.getElementById('success-message');
-    const errorMessage = document.getElementById('error-message');
-
-    if (successMessage) {
-        setTimeout(() => {
-            successMessage.style.opacity = '0'; 
-            setTimeout(() => {
-                successMessage.style.display = 'none';
-            }, 500);
-        }, 3000);
-    }
-
-    if (errorMessage) {
-        setTimeout(() => {
-            errorMessage.style.opacity = '0'; 
-            setTimeout(() => {
-                errorMessage.style.display = 'none'; 
-            }, 500);
-        }, 3000); 
-    }
 });
-
-//clean up the search input and send to search function
-function handleSearch(event){
-    event.preventDefault();
-
-    const searchInput = document.getElementById('search-input');
-    const searchValue = searchInput.value.trim();
-
-    searchPosts(searchValue);
-
-    return false;
-}
-
-function searchPosts(key){
-    currentSearchTerm = key.toLowerCase();
-    applyFilters();
-}
-
-function applyFilters(){
-    const posts = document.querySelectorAll('.post');
-    //get search filter info
-    const userFilter = document.getElementById("filter-users").checked;
-    const postFilter = document.getElementById("filter-posts").checked;
-
-    posts.forEach(post => {
-        // get post title and topic
-        const postTitle = post.querySelector('h2').textContent.toLowerCase();
-        const postTopic = post.querySelector('.post-date').textContent.toLowerCase();
-        const postUser = post.querySelector('.username').textContent.toLowerCase();
-        
-        // check if it matches topic filter
-        const matchesTopic = (currentTopicFilter === 'all' || postTopic.includes(currentTopicFilter));
-        
-        // determine search matches based on checked filters
-        let matchesSearch = false;
-        
-        // if no search term, everything matches
-        if (currentSearchTerm === '') {
-            matchesSearch = true;
-        } else {
-            // check title/content if post filter is on
-            const titleMatches = postFilter && postTitle.includes(currentSearchTerm);
-            
-            // check username if user filter is on
-            const userMatches = userFilter && postUser.includes(currentSearchTerm);
-            
-            // match if either condition is true based on selected filters
-            matchesSearch = titleMatches || userMatches;
-        }
-        
-        // only show if it matches both the topic filter and search criteria
-        if (matchesTopic && matchesSearch) {
-            post.style.display = 'block';
-        } else {
-            post.style.display = 'none';
-        }
-    });
-}
-
 
 // functions for the post creation popup
 function openForm() {
@@ -308,16 +157,9 @@ function deletePost(postId) {
         input.type = 'hidden';
         input.name = 'postId';
         input.value = postId;
-
-        // add redirect URL input
-        const redirectInput = document.createElement('input');
-        redirectInput.type = 'hidden';
-        redirectInput.name = 'redirect_url';
-        redirectInput.value = window.location.pathname;
-
+        
         // add the input to the form, and add the form to the document
         form.appendChild(input);
-        form.appendChild(redirectInput);
         document.body.appendChild(form);
         
         // submit the form to delete_post.php
