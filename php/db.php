@@ -1,13 +1,16 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "campusconnect";
+$config = require 'C:\xampp\htdocs\config.php';
 
-// create connection
-$conn = new mysqli($servername, $username, $password, $dbname, 3307);
+// Create connection
+$conn = new mysqli(
+    $config['servername'],
+    $config['username'],
+    $config['password'],
+    $config['dbname'],
+    $config['port']
+);
 
-// check connection
+// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }

@@ -10,7 +10,7 @@ if (!isset($_SESSION['username']) || !isset($_SESSION['user_id'])) {
 
 // get post data
 $post_id = isset($_POST['post_id']) ? (int)$_POST['post_id'] : 0;
-$comment = isset($_POST['comment']) ? trim($_POST['comment']) : '';
+$comment = isset($_POST['comment']) ? htmlspecialchars(trim($_POST['comment'])) : '';
 $user_id = $_SESSION['user_id'];
 
 // validate input

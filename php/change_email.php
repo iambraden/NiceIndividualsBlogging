@@ -7,7 +7,7 @@ $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $oldEmail = trim($_POST['oldEmail']);    
-    $newEmail = trim($_POST['newEmail']);
+    $newEmail = htmlspecialchars(trim($_POST['newEmail']));
 
     //check if old email exists
     $sql = "SELECT id FROM users WHERE email = ?";

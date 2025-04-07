@@ -9,17 +9,14 @@ $sql = "SELECT p.id, p.title, p.content, p.topic, p.created_at, u.username, u.pr
         FROM posts p 
         JOIN users u ON p.user_id = u.id 
         ORDER BY p.created_at DESC";
-        
-try {
-    $result = $conn->query($sql);
-    if ($result) {
-        while ($row = $result->fetch_assoc()) {
-            $posts[] = $row;
-        }
-    }
-} catch (Exception $e) {
-    error_log("Error fetching posts: " . $e->getMessage());
+
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_assoc()) {
+    $posts[] = $row;
 }
+$stmt->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">

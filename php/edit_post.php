@@ -12,8 +12,8 @@ if (!isset($_SESSION['username'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // get form data
     $post_id = $_POST['postId'];
-    $title = trim($_POST['postTitle']);
-    $body = trim($_POST['postBody']);
+    $title = htmlspecialchars(trim($_POST['postTitle']));
+    $body = htmlspecialchars(trim($_POST['postBody']));
     $username = $_SESSION['username'];
     
     // Initialize redirect URL once at the top

@@ -7,7 +7,7 @@ $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $oldPassword = trim($_POST['oldPassword']);    
-    $newPassword = trim($_POST['newPassword']);
+    $newPassword = htmlspecialchars(trim($_POST['newPassword']));
 
     //check if old password exists
     $sql = "SELECT password FROM users WHERE id = ?";

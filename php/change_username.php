@@ -7,7 +7,7 @@ $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $oldUsername = trim($_POST['oldUsername']);    
-    $newUsername = trim($_POST['newUsername']);
+    $newUsername = htmlspecialchars(trim($_POST['newUsername']));
 
     //check if old username exists
     $sql = "SELECT id FROM users WHERE username = ?";

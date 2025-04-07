@@ -65,9 +65,9 @@ unset($_SESSION['error']);
             <?php endif; ?>
             <form action="change_password.php" method="post" enctype="multipart/form-data">
                 <label for="oldPassword">Current Password</label>
-                <input type="text" id="oldPassword" name="oldPassword" required>
+                <input type="password" id="oldPassword" name="oldPassword" required>
                 <label for="newPassword">New Password</label>
-                <input type="text" id="newPassword" name="newPassword" required>
+                <input type="password" id="newPassword" name="newPassword" required>
                 <button type="submit" class="submit-button">Change Password</button>
             </form>
         </div>

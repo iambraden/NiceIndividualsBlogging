@@ -2,9 +2,9 @@
 session_start();
 require_once 'db.php';
 
-$username = $_POST['username'] ?? '';
-$password = $_POST['password'] ?? '';
-$role = $_POST['role'] ?? '';
+$username = htmlspecialchars($_POST['username'] ?? '');
+$password = htmlspecialchars($_POST['password'] ?? '');
+$role = htmlspecialchars($_POST['role'] ?? '');
 
 // Validate inputs
 if (empty($username) || empty($password)) {
