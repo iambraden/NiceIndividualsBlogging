@@ -35,6 +35,30 @@ try {
     error_log("Error fetching posts: " . $e->getMessage());
 }
 
+// Fetch user's comments
+$userComments = [];
+$sql = "SELECT c.content, c.created_at, p.title AS post_title 
+        FROM comments c 
+        JOIN posts p ON c.post_id = p.id 
+        WHERE c.user_id = (SELECT id FROM users WHERE username = ?)
+        ORDER BY c.created_at DESC";
+
+try {
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $userComments[] = $row;
+        }
+    }
+    $stmt->close();
+} catch (Exception $e) {
+    error_log("Error fetching comments: " . $e->getMessage());
+}
+
 // fetch user data from the database
 $sql = "SELECT profile_picture FROM users WHERE username = ?";
 $stmt = $conn->prepare($sql);
@@ -239,6 +263,24 @@ unset($_SESSION['error']);
         <?php endif; ?>
     </div>
 
+    <div class="comments-sidebar">
+        <h3>Your Comments</h3>
+        <div class="comments-list">
+            <?php if (empty($userComments)): ?>
+                <p>No comments yet.</p>
+            <?php else: ?>
+                <?php foreach ($userComments as $comment): ?>
+                    <div class="comment-item">
+                        <p class="comment-content"><?php echo htmlspecialchars($comment['content']); ?></p>
+                        <p class="comment-meta">
+                            On <strong><?php echo htmlspecialchars($comment['post_title']); ?></strong> 
+                            at <?php echo date('M d, Y g:i A', strtotime($comment['created_at'])); ?>
+                        </p>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+    </div>
 
     <script src="../scripts/profile.js"></script>
 </body>
