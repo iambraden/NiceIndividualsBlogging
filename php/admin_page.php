@@ -32,7 +32,10 @@ unset($_SESSION['error']);
 
             <form action="change_user_role.php" method="post">
                 <label for="selectUsername">User to Change</label>
-                <input type="text" id="selectUsername" name="selectUsername" required><br>
+                <input type="text" id="selectUsername" name="selectUsername"><br>
+                <p>or</p><br>
+                <label for="selectUserByEmail">User's email</label>
+                <input type="text" id="selectUserByEmail" name="selectUserByEmail"><br>
 
                 <label for="user">User</label>    
                 <input type="radio" id="user" name="user_role" value="user"
@@ -49,5 +52,5 @@ unset($_SESSION['error']);
         </div>
     </div>
 </body>
-<script src="../scripts/signin.js"></script>
+<script src="../scripts/admin_page.js"></script>
 </html>
