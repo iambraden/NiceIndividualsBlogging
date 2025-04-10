@@ -1,5 +1,5 @@
 <?php
-$config = require 'C:\xampp\htdocs\config.php';
+$config = require '../../config.php';
 
 // Create connection
 $conn = new mysqli(
