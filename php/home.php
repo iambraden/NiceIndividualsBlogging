@@ -175,6 +175,12 @@ $stmt->close();
                         <img src="<?php echo htmlspecialchars($profilePic); ?>" alt="User Icon" class="user-icon">
                         <span class="username"><?php echo htmlspecialchars($post['username']); ?></span>
                         
+                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === "admin"): ?>
+                            <form method="post" onsubmit="return false;">
+                            <button type="button" onclick="adminDeletePost(<?php echo $post['id']; ?>)">Admin: Delete Post</button>
+                            </form>
+                        <?php endif; ?>
+
                         <?php if ($isLoggedIn && $_SESSION['username'] === $post['username']): ?>
                         <div class="post-options">
                             <button class="post-options-btn">⋮</button>
