@@ -31,7 +31,7 @@ unset($_SESSION['error']);
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
-            <form action="change_username.php" method="post" enctype="multipart/form-data">
+            <form id='usernameForm' action="change_username.php" method="post" enctype="multipart/form-data">
                 <label for="oldUsername">Current Username</label>
                 <input type="text" id="oldUsername" name="oldUsername" required>
                 <label for="newUsername">New Username</label>
@@ -47,7 +47,7 @@ unset($_SESSION['error']);
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
-            <form action="change_email.php" method="post" enctype="multipart/form-data">
+            <form id='emailForm' action="change_email.php" method="post" enctype="multipart/form-data">
                 <label for="oldEmail">Current Email</label>
                 <input type="text" id="oldEmail" name="oldEmail" required>
                 <label for="newEmail">New Email</label>
@@ -63,7 +63,7 @@ unset($_SESSION['error']);
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
-            <form action="change_password.php" method="post" enctype="multipart/form-data">
+            <form id='passwordForm' action="change_password.php" method="post" enctype="multipart/form-data">
                 <label for="oldPassword">Current Password</label>
                 <input type="password" id="oldPassword" name="oldPassword" required>
                 <label for="newPassword">New Password</label>

@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->store_result();
     if ($stmt->num_rows == 0) {
         $errors[] = 'Username does not exist.';
+        header('Location: account_settings.php?error=Username does not exist');
         exit();
     }
 
@@ -27,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param('si', $newUsername, $_SESSION['user_id']);
         if ($stmt->execute()) {
             $_SESSION['username'] = $newUsername;
-            header('Location: account_settings.php');
+            header('Location: profile.php?success=Username updated successfully');
             exit();
         } else {
             // Log database errors

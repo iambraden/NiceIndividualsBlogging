@@ -19,9 +19,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->fetch();
     if ($stmt->num_rows == 0) {
         $errors[] = 'User not found';
+        header('Location: account_settings.php?error=User not found');
+        exit();
     }
     if (!isset($oldPassword) || !password_verify($oldPassword, $storedPassword)) {
         $errors[] = 'Passwords do not match';
+        header('Location: account_settings.php?error=Passwords do not match');
+        exit();
     }
 
     //replace password
@@ -31,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('si', $hashed_newPassword, $_SESSION['user_id']);
         if ($stmt->execute()) {
-            header('Location: account_settings.php');
+            header('Location: profile.php?success=Password updated successfully');
             exit();
         } else {
             // Log database errors

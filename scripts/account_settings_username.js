@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
-    const form = document.querySelector('form');
+    const form = document.getElementById('usernameForm');
     
     const oldUsername = document.getElementById('oldUsername');
     const newUsername = document.getElementById('newUsername');
