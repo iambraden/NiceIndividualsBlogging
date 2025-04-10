@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
-    const form = document.querySelector('form');
+    const form = document.getElementById('passwordForm');
     
     const oldPassword = document.getElementById('oldPassword');
     const newPassword = document.getElementById('newPassword');

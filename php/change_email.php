@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('si', $newEmail, $_SESSION['user_id']);
         if ($stmt->execute()) {
+            $_SESSION['success'] = 'Email changed successfully!';
             header('Location: account_settings.php');
             exit();
         } else {

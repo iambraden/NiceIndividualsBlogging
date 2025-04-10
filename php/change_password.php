@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('si', $hashed_newPassword, $_SESSION['user_id']);
         if ($stmt->execute()) {
+            $_SESSION['success'] = 'Password changed successfully!';
             header('Location: account_settings.php');
             exit();
         } else {

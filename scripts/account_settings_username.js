@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
-    const form = document.querySelector('form');
+    const form = document.getElementById('usernameForm');
     
     const oldUsername = document.getElementById('oldUsername');
     const newUsername = document.getElementById('newUsername');
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }); 
 
     newUsername.addEventListener('input', function(){
-        if(userName.value.trim() === ''){
+        if(newUsername.value.trim() === ''){
             newUsernameReq.innerHTML = 'Username is required';
         }else{
             newUsernameReq.innerHTML = '';

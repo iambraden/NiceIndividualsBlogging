@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param('si', $newUsername, $_SESSION['user_id']);
         if ($stmt->execute()) {
             $_SESSION['username'] = $newUsername;
+            $_SESSION['success'] = 'Username changed successfully!';
             header('Location: account_settings.php');
             exit();
         } else {

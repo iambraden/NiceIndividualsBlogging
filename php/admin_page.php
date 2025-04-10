@@ -31,22 +31,40 @@ unset($_SESSION['error']);
             <?php endif; ?>
 
             <form action="change_user_role.php" method="post">
-                <label for="selectUsername">User to Change</label>
-                <input type="text" id="selectUsername" name="selectUsername"><br>
-                <p>or</p><br>
-                <label for="selectUserByEmail">User's email</label>
-                <input type="text" id="selectUserByEmail" name="selectUserByEmail"><br>
+                <div class="form-group">
+                    <label for="selectUsername">User to change by username</label>
+                    <input type="text" id="selectUsername" name="selectUsername" placeholder="Enter username">
+                    <p class="or-text">or</p>
+                </div>
 
-                <label for="user">User</label>    
-                <input type="radio" id="user" name="user_role" value="user"
-                <?php if (isset($_POST['user_role']) && $_POST['user_role'] == "user") echo "checked"; ?>>
-                <label for="css">Admin</label>
-                <input type="radio" id="admin" name="user_role" value="admin"
-                <?php if (isset($_POST['user_role']) && $_POST['user_role'] == "admin") echo "checked"; ?>>
-                <label for="css">Ban User</label>
-                <input type="radio" id="banned" name="user_role" value="banned"
-                <?php if (isset($_POST['user_role']) && $_POST['user_role'] == "restricted") echo "checked"; ?>>
-                
+            
+
+                <div class="form-group">
+                    <label for="selectUserByEmail">User to change by email</label>
+                    <input type="text" id="selectUserByEmail" name="selectUserByEmail" placeholder="Enter email">
+                </div>
+
+                <div class="form-group">
+                    <label>Role</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" id="user" name="user_role" value="user"
+                            <?php if (isset($_POST['user_role']) && $_POST['user_role'] == "user") echo "checked"; ?>>
+                            User
+                        </label>
+                        <label>
+                            <input type="radio" id="admin" name="user_role" value="admin"
+                            <?php if (isset($_POST['user_role']) && $_POST['user_role'] == "admin") echo "checked"; ?>>
+                            Admin
+                        </label>
+                        <label>
+                            <input type="radio" id="banned" name="user_role" value="banned"
+                            <?php if (isset($_POST['user_role']) && $_POST['user_role'] == "banned") echo "checked"; ?>>
+                            Ban User
+                        </label>
+                    </div>
+                </div>
+
                 <button type="submit" class="submit-button" name="role">Change Role</button>
             </form>
         </div>

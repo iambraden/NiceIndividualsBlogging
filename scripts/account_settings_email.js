@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
-    const form = document.querySelector('form');
+    const form = document.getElementById('emailForm');
     
     const oldEmail = document.getElementById('oldEmail');
     const newEmail = document.getElementById('newEmail');
