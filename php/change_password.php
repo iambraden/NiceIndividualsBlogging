@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $oldPassword = trim($_POST['oldPassword']);    
     $newPassword = htmlspecialchars(trim($_POST['newPassword']));
 
-    //check if old password exists
+    //check if old password matches
     $sql = "SELECT password FROM users WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $_SESSION['user_id']);
@@ -18,14 +18,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_result($storedPassword);
     $stmt->fetch();
     if ($stmt->num_rows == 0) {
-        $errors[] = 'User not found';
+        $errors[] = 'User not found.';
     }
-    if (!isset($oldPassword) || !password_verify($oldPassword, $storedPassword)) {
-        $errors[] = 'Passwords do not match';
+    if (!password_verify($oldPassword, $storedPassword)) {
+        $errors[] = 'Current password is incorrect.';
     }
 
     //replace password
-    if (empty($errors) && isset($newPassword)) {
+    if (empty($errors)) {
         $hashed_newPassword = password_hash($newPassword, PASSWORD_DEFAULT);
         $sql = "UPDATE users SET password=? WHERE id=?";
         $stmt = $conn->prepare($sql);
@@ -35,13 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: account_settings.php');
             exit();
         } else {
-            // Log database errors
             error_log('Database error: ' . $stmt->error);
-            header('Location: account_settings.php');
+            $errors[] = 'An error occurred while updating the password.';
         }
     }
 
+    //redirect back with errors
+    $_SESSION['error'] = $errors;
+    header('Location: account_settings.php');
+    exit();
 }
-
-
 ?>

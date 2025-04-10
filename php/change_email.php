@@ -16,8 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute();
     $stmt->store_result();
     if ($stmt->num_rows == 0) {
-        $errors[] = 'Email is incorrect';
+        $errors[] = 'Email is incorrect.';
     }
+
     //check if new email is valid
     if (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
         $errors[] = 'Invalid email format.';
@@ -33,12 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: account_settings.php');
             exit();
         } else {
-            // Log database errors
             error_log('Database error: ' . $stmt->error);
+            $errors[] = 'An error occurred while updating the email.';
         }
     }
 
+    //redirect back with errors
+    $_SESSION['error'] = $errors;
+    header('Location: account_settings.php');
+    exit();
 }
-
-
 ?>

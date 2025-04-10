@@ -65,10 +65,10 @@ unset($_SESSION['error']);
                         <?php echo htmlspecialchars($success); ?>
                     </div>
                 <?php endif; ?>
-                <?php if (!empty($errors)): ?>
-                    <div class="error-messages">
-                        <?php foreach ($errors as $error): ?>
-                            <p><?php echo htmlspecialchars($error); ?></p>
+                <?php if (!empty($error)): ?>
+                    <div id="error-message" class="error-message">
+                        <?php foreach ((array) $error as $err): ?>
+                            <?php echo htmlspecialchars($err); ?>
                         <?php endforeach; ?>
                     </div>
                 <?php endif; ?>
@@ -81,13 +81,6 @@ unset($_SESSION['error']);
                 </form>
             </div>
             <div class="form-container">
-                <?php if (!empty($errors)): ?>
-                    <div class="error-messages">
-                        <?php foreach ($errors as $error): ?>
-                            <p><?php echo htmlspecialchars($error); ?></p>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
                 <form id="emailForm" action="change_email.php" method="post" enctype="multipart/form-data">
                     <label for="oldEmail">Current Email</label>
                     <input type="text" id="oldEmail" name="oldEmail" required>
@@ -97,13 +90,6 @@ unset($_SESSION['error']);
                 </form>
             </div>
             <div class="form-container">
-                <?php if (!empty($errors)): ?>
-                    <div class="error-messages">
-                        <?php foreach ($errors as $error): ?>
-                            <p><?php echo htmlspecialchars($error); ?></p>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
                 <form id="passwordForm" action="change_password.php" method="post" enctype="multipart/form-data">
                     <label for="oldPassword">Current Password</label>
                     <input type="password" id="oldPassword" name="oldPassword" required>

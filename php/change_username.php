@@ -16,10 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute();
     $stmt->store_result();
     if ($stmt->num_rows == 0) {
-        $errors[] = 'Username does not exist.';
-        exit();
+        $errors[] = 'Current username does not exist.';
     }
-
     //replace username
     if (empty($errors)) {
         $sql = "UPDATE users SET username=? WHERE id=?";
@@ -31,14 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: account_settings.php');
             exit();
         } else {
-            // Log database errors
             error_log('Database error: ' . $stmt->error);
-            header('Location: account_settings.php');
-            exit();
+            $errors[] = 'An error occurred while updating the username.';
         }
     }
 
+    //redirect back with errors
+    $_SESSION['error'] = $errors;
+    header('Location: account_settings.php');
+    exit();
 }
-
-
 ?>
