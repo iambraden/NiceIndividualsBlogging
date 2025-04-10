@@ -281,6 +281,33 @@ function closeEditForm() {
     }
 }
 
+function adminDeletePost(postId) {
+    if (confirm('Are you sure you want to delete this post?')) {
+        console.log('Delete post:', postId);
+
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'admin_delete_post.php';
+        form.style.display = 'none';
+        
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'postId';
+        input.value = postId;
+
+        const redirectInput = document.createElement('input');
+        redirectInput.type = 'hidden';
+        redirectInput.name = 'redirect_url';
+        redirectInput.value = window.location.pathname;
+
+        form.appendChild(input);
+        form.appendChild(redirectInput);
+        document.body.appendChild(form);
+        
+        form.submit();
+    }
+}
+
 function deletePost(postId) {
     if (confirm('Are you sure you want to delete this post?')) {
         console.log('Delete post:', postId);

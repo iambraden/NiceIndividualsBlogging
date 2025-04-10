@@ -473,3 +473,6 @@ button {
     float: right;
     margin-top: 5px;
 }
+button[onclick^="adminDeletePost"] {
+    transform: translateX(4em);
+}
