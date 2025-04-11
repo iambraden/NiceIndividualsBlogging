@@ -17,6 +17,23 @@ while ($row = $result->fetch_assoc()) {
     $posts[] = $row;
 }
 $stmt->close();
+
+// grab trending topics from the last 24 hours (limit of 5 topics in case we add more)
+$trendingTopics = [];
+$trendingSQL = "SELECT topic, COUNT(*) as post_count 
+                FROM posts 
+                WHERE created_at >= DATE_SUB(NOW(), INTERVAL 24 HOUR) 
+                GROUP BY topic 
+                ORDER BY post_count DESC 
+                LIMIT 5";
+
+$trendingStmt = $conn->prepare($trendingSQL);
+$trendingStmt->execute();
+$trendingResult = $trendingStmt->get_result();
+while ($row = $trendingResult->fetch_assoc()) {
+    $trendingTopics[] = $row;
+}
+$trendingStmt->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,6 +112,26 @@ $stmt->close();
     <div class="sidebar">
         <button class="sidebar-button" onclick="window.location.href='home.php'"><strong>Home</strong></button>
         <button class="sidebar-button" onclick="window.location.href='profile.php'">My Profile</button>
+    </div>
+
+    <!-- trending topics sidebar -->
+    <div class="trending-sidebar">
+        <div class="trending-header">
+            <h3>Trending Topics</h3>
+            <span class="trending-subtitle">Last 24 hours</span>
+        </div>
+        <div class="trending-topics">
+            <?php if (empty($trendingTopics)): ?>
+                <p class="no-trending">No trending topics yet!</p>
+            <?php else: ?>
+                <?php foreach ($trendingTopics as $topic): ?>
+                    <div class="trending-topic">
+                        <span class="trending-topic-name"><?php echo htmlspecialchars(ucfirst($topic['topic'])); ?></span>
+                        <span class="trending-topic-count"><?php echo $topic['post_count']; ?> posts</span>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
     </div>
 
     <?php if ($isLoggedIn): ?>
@@ -221,7 +258,6 @@ $stmt->close();
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
-
     <script src="../scripts/home.js"></script>
 </body>
 </html>

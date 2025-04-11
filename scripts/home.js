@@ -113,6 +113,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //event handling for topic buttons
 
+    //  click handlers for the trending topics
+    const trendingTopics = document.querySelectorAll('.trending-topic');
+    trendingTopics.forEach(topic => {
+        topic.addEventListener('click', function() {
+            const topicName = this.querySelector('.trending-topic-name').textContent.toLowerCase();
+            
+            // find the corresponding topic button and "click" it
+            const topicButtons = document.querySelectorAll('.topic-button');
+            topicButtons.forEach(button => {
+                if (button.textContent.toLowerCase() === topicName) {
+                    // make a mock event on the button to click it
+                    const mockEvent = { target: button };
+                    filterPosts(topicName, mockEvent);
+                }
+            });
+        });
+    });
 });
 
 //clean up the search input and send to search function

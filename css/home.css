@@ -213,7 +213,6 @@ button {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
 .post-button {
     position: fixed;
     bottom: 30px;
@@ -472,6 +471,77 @@ button {
 .comment-submit-btn {
     float: right;
     margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.trending-sidebar {
+    position: fixed;
+    right: 20px;
+    top: 150px;
+    width: 200px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    z-index: 100;
+}
+
+.trending-header {
+    margin-bottom: 10px;
+    text-align: center;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 8px;
+}
+
+.trending-header h3 {
+    margin: 0 0 5px 0;
+    color: #333;
+}
+
+.trending-subtitle {
+    font-size: 12px;
+    color: #888;
+}
+
+.trending-topics {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.trending-topic {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.trending-topic:hover {
+    background-color: #eef5fd;
+}
+
+.trending-topic-name {
+    font-weight: 500;
+    color: #333;
+}
+
+.trending-topic-count {
+    font-size: 12px;
+    color: #666;
+    background-color: #e6e6e6;
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+
+.no-trending {
+    text-align: center;
+    color: #888;
+    font-style: italic;
+    padding: 10px 0;
 }
 button[onclick^="adminDeletePost"] {
     transform: translateX(4em);
