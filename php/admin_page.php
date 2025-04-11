@@ -32,9 +32,9 @@ unset($_SESSION['error']);
 
             <form action="change_user_role.php" method="post">
                 <label for="selectUsername">User to Change</label>
-                <input type="text" id="selectUsername" name="selectUsername"><br>
+                <input type="text" id="selectUsername" name="selectUsername">
                 <p>or</p><br>
-                <label for="selectUserByEmail">User's email</label>
+                <br><label for="selectUserByEmail">User's email</label>
                 <input type="text" id="selectUserByEmail" name="selectUserByEmail"><br>
 
                 <label for="user">User</label>    

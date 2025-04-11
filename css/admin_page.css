@@ -106,4 +106,7 @@ p {
     font-size: 14px;
     margin-bottom: 20px;
 }
+#user, #admin, #banned {
+    transform: translate(-6em, -1.5em);
+}
 
